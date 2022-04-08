@@ -1,7 +1,9 @@
 import { Cookies } from "react-cookie";
 
 const getCookies = (cookieName) => {
-  return Cookies[cookieName];
+    var cookies = new Cookies();
+    
+  return cookies.get(cookieName);
 };
 
 export default getCookies;
