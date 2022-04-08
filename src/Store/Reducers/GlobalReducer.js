@@ -3,11 +3,8 @@ import getCookies from "../../Utilities/Cookies/getCookies";
 import setCookies from "../../Utilities/Cookies/setCookies";
 import * as actions from "../Actions/ActionTypes";
 
-const INITIAL_STATE = {
-  isLoggedIn: getCookies(LOGIN_STATUS) || false,
-};
-
-const dummyReducer = (state = INITIAL_STATE, action) => {
+const GlobalReducer = (state, action) => {
+  console.info(action, state);
   switch (action.type) {
     case actions.LOG_IN:
       setCookies(LOGIN_STATUS, true);
@@ -16,8 +13,8 @@ const dummyReducer = (state = INITIAL_STATE, action) => {
       setCookies(LOGIN_STATUS, false);
       return { ...state, isLoggedIn: false };
     default:
-      return state;
+      return { ...state, isLoggedIn: getCookies(LOGIN_STATUS) };
   }
 };
 
-export default dummyReducer;
+export default GlobalReducer;
