@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./Components/LandingPage";
 import AboutPage from "./Components/AboutPage";
+import DummyLogInOut from "./Components/DummyLogInOut";
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
         <div>
           <nav>
             <ul>
+              <li>
+                <DummyLogInOut/>
+              </li>
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -20,11 +24,11 @@ function App() {
           </nav>
 
           <Routes>
-            <Route path="/about" element={<AboutPage />}/>
+            <Route path="/about" element={<AboutPage />} />
             {/* <Route path="/users">
               <Users />
             </Route> */}
-            <Route path="/" element={<LandingPage />}/>
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </div>
       </Router>
