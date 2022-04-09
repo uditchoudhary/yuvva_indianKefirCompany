@@ -1,7 +1,9 @@
+import BodyContainer from "../BodyContainer";
+
 const OurRoots = () => {
   return (
     <>
-      <div> OurRoots </div>
+      <BodyContainer> OurRoots </BodyContainer>
     </>
   );
 };

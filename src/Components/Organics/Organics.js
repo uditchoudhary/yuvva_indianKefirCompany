@@ -1,7 +1,9 @@
+import BodyContainer from "../BodyContainer";
+
 const Organics = () => {
   return (
     <>
-      <div> Organics </div>
+      <BodyContainer> Organics </BodyContainer>
     </>
   );
 };

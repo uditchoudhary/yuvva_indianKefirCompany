@@ -1,7 +1,9 @@
+import BodyContainer from "../BodyContainer";
+
 const LandingPage = () => {
     return (
         <>
-            <div> Landing Page </div>
+            <BodyContainer> Landing Page </BodyContainer>
         </>
     )
 }

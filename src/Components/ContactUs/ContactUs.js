@@ -1,7 +1,9 @@
+import BodyContainer from "../BodyContainer";
+
 const ContactUs = () => {
   return (
     <>
-      <div> ContactUs </div>
+      <BodyContainer> ContactUs </BodyContainer>
     </>
   );
 };

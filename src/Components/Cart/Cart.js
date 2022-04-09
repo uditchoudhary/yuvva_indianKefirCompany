@@ -1,7 +1,9 @@
+import BodyContainer from "../BodyContainer";
+
 const Cart = () => {
   return (
     <>
-      <div> Cart </div>
+      <BodyContainer> Cart </BodyContainer>
     </>
   );
 };

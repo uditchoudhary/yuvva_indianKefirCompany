@@ -1,7 +1,9 @@
+import BodyContainer from "../BodyContainer";
+
 const Login = () => {
   return (
     <>
-      <div> Login </div>
+      <BodyContainer> Login </BodyContainer>
     </>
   );
 };
