@@ -150,10 +150,13 @@ const Footer = () => {
               </div>
             </FooterCols>
           </FooterSection>
-          <ImportantLinks className="row row-cols-2 imp-links">
+          <ImportantLinks className="row row-cols-1 row-cols-md-4 imp-links">
             <div className="footer-about-us col">About Us</div>
+
             <div className="footer-about-us col">Privacy Policy</div>
+
             <div className="footer-about-us col">Refund Policy</div>
+
             <div className="footer-about-us col">Terms and Conditions</div>
           </ImportantLinks>
           <div className="row mt-auto">
