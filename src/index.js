@@ -5,15 +5,18 @@ import { createStore } from "redux";
 import { CookiesProvider } from "react-cookie";
 import rootReducer from "./Store/Reducers/GlobalReducer";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 const store = createStore(rootReducer);
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CookiesProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </CookiesProvider>
+    <BrowserRouter>
+      <CookiesProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </CookiesProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

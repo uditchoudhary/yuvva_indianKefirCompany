@@ -1,19 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./Components/LandingPage";
-import AboutPage from "./Components/AboutPage";
-import DummyLogInOut from "./Components/DummyLogInOut";
+import AboutPage from "./Components/OurRoots";
+import NavigationBar from "./Components/NavigationBar/NavigationBar";
+import OutRoots from "./Components/OurRoots/OurRoots";
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <NavigationBar />
         <div>
           <nav>
             <ul>
-              <li>
-                <DummyLogInOut/>
-              </li>
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -22,16 +20,12 @@ function App() {
               </li>
             </ul>
           </nav>
-
           <Routes>
             <Route path="/about" element={<AboutPage />} />
-            {/* <Route path="/users">
-              <Users />
-            </Route> */}
+            <Route path="/ourroots" element={<OutRoots/>}/>
             <Route path="/" element={<LandingPage />} />
           </Routes>
         </div>
-      </Router>
     </div>
   );
 }

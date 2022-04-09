@@ -1,0 +1,14 @@
+:root {
+    --custom-primary1: #000000;
+    --custom-primary2: #4a4a4a;
+    --custom-secondary: #d2d2d2;
+
+    --custom-tertiary: #eae7e0;
+    
+}
+
+* {
+    font-family:basier_squarebold;
+}
+
+@import '~bootstrap/scss/bootstrap.scss';
