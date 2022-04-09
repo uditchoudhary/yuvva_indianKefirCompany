@@ -60,12 +60,12 @@ const Footer = () => {
                 <div className="footer-menu-title">ALL CATEGORIES</div>
                 <hr />
                 <ul>
-                  <li>Probiotics - Kambucha</li>
-                  <li>Probiotics - Kefir</li>
-                  <li>Probiotics - Sauerkraut</li>
+                  <li>Kombucha</li>
+                  <li>Kefir</li>
+                  <li>Sauerkraut</li>
 
-                  <li>Organics - Gluten Free Milets</li>
-                  <li>Organics - Cold Pressed Oil</li>
+                  <li>Gluten Free Milets</li>
+                  <li>Cold Pressed Oil</li>
                 </ul>
               </div>
             </FooterCols>

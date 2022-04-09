@@ -80,30 +80,45 @@ const NavigationBar = () => {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="ms-auto navbar-nav pe-5">
-                <StyledLink
-                  className="nav-link ms-3"
-                  aria-current="page"
-                  to="/probiotics"
-                >
-                  Probiotics
-                </StyledLink>
-                <StyledLink className="nav-link ms-3" to="/organics">
-                  Organics
-                </StyledLink>
-                <StyledLink className="nav-link ms-3" to="/ourroots">
-                  Our Roots
-                </StyledLink>
-                <StyledLink className="nav-link ms-3" to="/contactus">
-                  Contact Us
-                </StyledLink>
-                <StyledLink className="nav-link ms-3" to="/login">
-                  Login / Logout
-                </StyledLink>
-                <StyledLink className="nav-link ms-3" to="/cart">
-                  Cart (0)
-                </StyledLink>
-              </div>
+              <ul className="ms-auto navbar-nav pe-5">
+                <li className="nav-item">
+                  <StyledLink
+                    className="nav-link ms-3 nav-item"
+                    aria-current="page"
+                    to="/probiotics"
+                  >
+                    Probiotics
+                  </StyledLink>
+                </li>
+                <li className="nav-item">
+                  <StyledLink className="nav-link nav-item ms-3" to="/organics">
+                    Organics
+                  </StyledLink>
+                </li>
+                <li className="nav-item">
+                  <StyledLink className="nav-link nav-item ms-3" to="/ourroots">
+                    Our Roots
+                  </StyledLink>
+                </li>
+                <li className="nav-item">
+                  <StyledLink
+                    className="nav-link nav-item ms-3"
+                    to="/contactus"
+                  >
+                    Contact Us
+                  </StyledLink>
+                </li>
+                <li className="nav-item">
+                  <StyledLink className="nav-link nav-item ms-3" to="/login">
+                    Login / Logout
+                  </StyledLink>
+                </li>
+                <li className="nav-item">
+                  <StyledLink className="nav-link nav-item ms-3" to="/cart">
+                    Cart (0)
+                  </StyledLink>
+                </li>
+              </ul>
             </div>
           </nav>
         </div>

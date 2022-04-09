@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 80vw;
   // height: auto;
-  height: 90vh;
+  height: 61vh;
   background-color: #b60c2040;
 `;
 
