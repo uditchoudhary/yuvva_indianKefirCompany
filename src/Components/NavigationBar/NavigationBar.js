@@ -79,7 +79,12 @@ const NavigationBar = () => {
               </svg>
             </button>
 
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarNavAltMarkup"
+              data-bs-target=".navbar-collapse"
+              data-bs-toggle="collapse"
+            >
               <ul className="ms-auto navbar-nav pe-5">
                 <li className="nav-item">
                   <StyledLink
