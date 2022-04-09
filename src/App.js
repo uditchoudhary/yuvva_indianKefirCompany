@@ -1,31 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "./Components/LandingPage";
-import AboutPage from "./Components/OurRoots";
 import NavigationBar from "./Components/NavigationBar/NavigationBar";
-import OutRoots from "./Components/OurRoots/OurRoots";
+import OurRoots from "./Components/OurRoots";
+import Probiotics from "./Components/Probiotics/";
+import Organics from "./Components/Organics/";
+import ContactUs from "./Components/ContactUs";
+import Login from "./Components/Login";
+import Cart from "./Components/Cart";
 
 function App() {
   return (
     <div className="App">
       <NavigationBar />
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
-          <Routes>
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/ourroots" element={<OutRoots/>}/>
-            <Route path="/" element={<LandingPage />} />
-          </Routes>
-        </div>
+      <div>
+        <Routes>
+          <Route exact path="/ourroots" element={<OurRoots />} />
+          <Route exact path="/probiotics" element={<Probiotics />} />
+          <Route exact path="/organics" element={<Organics />} />
+          <Route exact path="/contactus" element={<ContactUs />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/cart" element={<Cart />} />
+
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+      </div>
     </div>
   );
 }

@@ -1,9 +1,9 @@
-const OutRoots = () => {
+const OurRoots = () => {
   return (
     <>
-      <div> OutRoots </div>
+      <div> OurRoots </div>
     </>
   );
 };
 
-export default OutRoots;
+export default OurRoots;

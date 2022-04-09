@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../static/images/yuuva_logo.png";
 import "./NavigationBar.css";
 
@@ -24,24 +25,24 @@ const NavigationBar = () => {
 
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="ms-auto navbar-nav pe-5">
-                <a className="nav-link" aria-current="page" href="#">
+                <Link className="nav-link" aria-current="page" to="/probiotics">
                   Probiotics
-                </a>
-                <a className="nav-link" href="#">
+                </Link>
+                <Link className="nav-link" to="/organics">
                   Organics
-                </a>
-                <a className="nav-link"  href="#">
+                </Link>
+                <Link className="nav-link" to="/ourroots">
                   Our Roots
-                </a>
-                <a className="nav-link" aria-current="page" href="#">
+                </Link>
+                <Link className="nav-link" to="/contactus">
                   Contact Us
-                </a>
-                <a className="nav-link" href="#">
+                </Link>
+                <Link className="nav-link" to="/login">
                   Login / Logout
-                </a>
-                <a className="nav-link" href="#">
+                </Link>
+                <Link className="nav-link" to="/cart">
                   Cart (0)
-                </a>
+                </Link>
               </div>
             </div>
           </nav>

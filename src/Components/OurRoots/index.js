@@ -1,3 +1,3 @@
-import AboutPage from "./OurRoots";
+import OurRoots from "./OurRoots";
 
-export default AboutPage;
+export default OurRoots;
