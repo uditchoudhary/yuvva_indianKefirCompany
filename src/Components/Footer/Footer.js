@@ -94,7 +94,7 @@ const Footer = () => {
                   <li>Kefir</li>
                   <li>Sauerkraut</li>
 
-                  <li>Gluten Free Milets</li>
+                  <li>Gluten Free Millets</li>
                   <li>Cold Pressed Oil</li>
                 </ul>
               </div>
