@@ -53,7 +53,7 @@ const NavigationBar = () => {
         ref={navBarRef}
       >
         <div className="justify-content-center">
-          <nav className="navbar navbar-expand-lg bg-inverse d-flex">
+          <nav className="navbar navbar-expand-xl d-flex">
             <a className="navbar-brand me-auto ps-5" href="/">
               <NavBarLogo src={logo} alt="Logo" className="yuuva-logo" />
             </a>

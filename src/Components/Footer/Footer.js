@@ -1,9 +1,20 @@
 import styled from "styled-components";
 import logo from "../../static/images/yuuva_logo-min.png";
+import { device } from "../../styles/devices";
 
 const FooterWrapper = styled.div`
   height: auto;
   width: 80vw;
+  & .footer-logo {
+    // @media (max-width: 800px) {
+    @media ${device.tablet} {
+      display: none;
+    }
+    @media ${device.laptopL} {
+      margin-left: 45px;
+      margin-top: 45px;
+    }
+  }
 `;
 
 const Copyright = styled.div`
@@ -19,6 +30,20 @@ const Copyright = styled.div`
 
 const FooterSection = styled.div`
   height: auto;
+  & > div > .footer-logo-text {
+    text-decoration: none;
+    color: #b60c20;
+  }
+`;
+
+const ImportantLinks = styled.div`
+  border: 0.1px solid #b60c20;
+  @media ${device.mobile} {
+    font-size: 14px;
+  }
+  & > div {
+    text-align: center;
+  }
 `;
 
 const FooterCols = styled.div`
@@ -37,6 +62,10 @@ const FooterCols = styled.div`
   & .social-icons-wrapper {
     margin-top: 20px;
   }
+  @media ${device.mobile} {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 `;
 
 const FooterLogo = styled.img`
@@ -50,10 +79,11 @@ const Footer = () => {
       <FooterWrapper className="container-fluid" id="footerBar">
         <div className="justify-content-center">
           <FooterSection className="row">
-            <div className="col p-5">
+            <div className="col p-5 footer-logo">
               <a href="/">
                 <FooterLogo src={logo} alt="Logo" />
               </a>
+              <div className="footer-logo-text">Indian Kefir Company</div>
             </div>
             <FooterCols className="col footer-menu-col">
               <div>
@@ -120,6 +150,12 @@ const Footer = () => {
               </div>
             </FooterCols>
           </FooterSection>
+          <ImportantLinks className="row row-cols-2 imp-links">
+            <div className="footer-about-us col">About Us</div>
+            <div className="footer-about-us col">Privacy Policy</div>
+            <div className="footer-about-us col">Refund Policy</div>
+            <div className="footer-about-us col">Terms and Conditions</div>
+          </ImportantLinks>
           <div className="row mt-auto">
             {/* <div className="col copyright-col"></div> */}
             <Copyright> &copy; 2022 Indian Kefir Company</Copyright>
