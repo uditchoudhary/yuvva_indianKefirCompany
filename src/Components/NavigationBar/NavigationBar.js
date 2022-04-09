@@ -6,16 +6,29 @@ import "./NavigationBar.css";
 const NavbarWrapper = styled.div`
   width: 80vw;
   border-bottom: 1px solid black;
+  transition: 1s;
 `;
 
+const NavBarLogo = styled.img`
+  width: 80px;
+  height: auto;
+`;
+
+window.onscroll = () => {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("navbar").style.background = "#ffffff";
+  } else {
+    document.getElementById("navbar").style.background = "none";
+  }
+};
 const NavigationBar = () => {
   return (
     <>
-      <NavbarWrapper className="container-fluid ">
+      <NavbarWrapper className="container-fluid sticky-top" id="navbar">
         <div className="justify-content-center">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex">
+          <nav className="navbar navbar-expand-lg d-flex">
             <a className="navbar-brand me-auto ps-5" href="/">
-              <img src={logo} alt="Logo" className="yuuva-logo" />
+              <NavBarLogo src={logo} alt="Logo" className="yuuva-logo" />
             </a>
             <button
               className="navbar-toggler"
