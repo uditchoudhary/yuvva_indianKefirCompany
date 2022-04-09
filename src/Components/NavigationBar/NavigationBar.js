@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import logo from "../../static/images/yuuva_logo.png";
+import logo from "../../static/images/yuuva_logo-min.png";
 import "./NavigationBar.css";
 
 const NavbarWrapper = styled.div`
@@ -15,6 +15,17 @@ const NavBarLogo = styled.img`
   height: auto;
 `;
 
+
+const StyledLink = styled(Link)`
+  color: var(--custom-primary1);
+  text-decoration: none;
+  font-weight: 500;
+  &:hover {
+    border-bottom: 0.2px solid black;
+    color: var(--logo-color)
+  }
+`;
+
 const NavigationBar = () => {
   const navBarRef = useRef(null);
 
@@ -23,10 +34,8 @@ const NavigationBar = () => {
       document.body.scrollTop > 20 ||
       document.documentElement.scrollTop > 20
     ) {
-      console.log("inside if ", navBarRef);
       navBarRef.current.style.background = "#ffffff";
     } else {
-      console.log("inside else ", navBarRef);
       navBarRef.current.style.background = "none";
     }
   };
@@ -65,7 +74,7 @@ const NavigationBar = () => {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-three-dots-vertical"
+                className="bi bi-three-dots-vertical"
                 viewBox="0 0 16 16"
               >
                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
@@ -74,28 +83,28 @@ const NavigationBar = () => {
 
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="ms-auto navbar-nav pe-5">
-                <Link
+                <StyledLink
                   className="nav-link ms-3"
                   aria-current="page"
                   to="/probiotics"
                 >
                   Probiotics
-                </Link>
-                <Link className="nav-link ms-3" to="/organics">
+                </StyledLink>
+                <StyledLink className="nav-link ms-3" to="/organics">
                   Organics
-                </Link>
-                <Link className="nav-link ms-3" to="/ourroots">
+                </StyledLink>
+                <StyledLink className="nav-link ms-3" to="/ourroots">
                   Our Roots
-                </Link>
-                <Link className="nav-link ms-3" to="/contactus">
+                </StyledLink>
+                <StyledLink className="nav-link ms-3" to="/contactus">
                   Contact Us
-                </Link>
-                <Link className="nav-link ms-3" to="/login">
+                </StyledLink>
+                <StyledLink className="nav-link ms-3" to="/login">
                   Login / Logout
-                </Link>
-                <Link className="nav-link ms-3" to="/cart">
+                </StyledLink>
+                <StyledLink className="nav-link ms-3" to="/cart">
                   Cart (0)
-                </Link>
+                </StyledLink>
               </div>
             </div>
           </nav>
