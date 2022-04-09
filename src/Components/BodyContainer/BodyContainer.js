@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 80vw;
-  height: auto;
-  background-color:red;
+  // height: auto;
+  height: 90vh;
+  background-color: #b60c2040;
 `;
 
 const BodyContainer = ({children}) => {
