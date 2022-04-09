@@ -8,6 +8,7 @@ import Organics from "./Components/Organics/";
 import ContactUs from "./Components/ContactUs";
 import Login from "./Components/Login";
 import Cart from "./Components/Cart";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -21,10 +22,10 @@ function App() {
           <Route exact path="/contactus" element={<ContactUs />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<Cart />} />
-
           <Route path="/" element={<LandingPage />} />
         </Routes>
       </div>
+      <Footer/>
     </div>
   );
 }

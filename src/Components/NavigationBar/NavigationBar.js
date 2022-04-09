@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import logo from "../../static/images/yuuva_logo-min.png";
-import "./NavigationBar.css";
 
 const NavbarWrapper = styled.div`
   width: 80vw;
@@ -15,14 +14,13 @@ const NavBarLogo = styled.img`
   height: auto;
 `;
 
-
 const StyledLink = styled(Link)`
   color: var(--custom-primary1);
   text-decoration: none;
   font-weight: 500;
   &:hover {
     border-bottom: 0.2px solid black;
-    color: var(--logo-color)
+    color: var(--logo-color);
   }
 `;
 
