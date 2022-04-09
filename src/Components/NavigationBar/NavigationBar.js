@@ -20,7 +20,7 @@ const StyledLink = styled(Link)`
   font-weight: 500;
   &:hover {
     border-bottom: 0.2px solid black;
-    color: var(--logo-color);
+    color: #b60c20;
   }
 `;
 
@@ -82,8 +82,6 @@ const NavigationBar = () => {
             <div
               className="collapse navbar-collapse"
               id="navbarNavAltMarkup"
-              data-bs-target=".navbar-collapse"
-              data-bs-toggle="collapse"
             >
               <ul className="ms-auto navbar-nav pe-5">
                 <li className="nav-item">
@@ -94,6 +92,18 @@ const NavigationBar = () => {
                   >
                     Probiotics
                   </StyledLink>
+                  {/* <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div> */}
                 </li>
                 <li className="nav-item">
                   <StyledLink className="nav-link nav-item ms-3" to="/organics">
