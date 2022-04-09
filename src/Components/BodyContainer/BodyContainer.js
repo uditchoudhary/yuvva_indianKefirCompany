@@ -8,10 +8,10 @@ const Container = styled.div`
   background-color: #b60c2040;
 `;
 
-const BodyContainer = ({children}) => {
-    useEffect(() => {
-        window.scrollTo(0,0)
-    })
+const BodyContainer = ({ children }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       <Container className="container-fluid">

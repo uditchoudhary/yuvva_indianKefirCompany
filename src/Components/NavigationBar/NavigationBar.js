@@ -7,6 +7,9 @@ const NavbarWrapper = styled.div`
   width: 80vw;
   border-bottom: 0.2px solid rgba(185, 89, 89, 0.536);
   transition: 0.5s;
+  & .dropdown-menu {
+    border: none;
+  }
 `;
 
 const NavBarLogo = styled.img`
@@ -53,8 +56,8 @@ const NavigationBar = () => {
         ref={navBarRef}
       >
         <div className="justify-content-center">
-          <nav className="navbar navbar-expand-xl d-flex">
-            <a className="navbar-brand me-auto ps-5" href="/">
+          <nav className="navbar navbar-expand-lg d-flex">
+            <a className="navbar-brand me-auto" href="/">
               <NavBarLogo src={logo} alt="Logo" className="yuuva-logo" />
             </a>
             <button
@@ -79,36 +82,61 @@ const NavigationBar = () => {
               </svg>
             </button>
 
-            <div
-              className="collapse navbar-collapse"
-              id="navbarNavAltMarkup"
-            >
-              <ul className="ms-auto navbar-nav pe-5">
-                <li className="nav-item">
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul className="ms-auto navbar-nav pe-3">
+                <li className="nav-item dropdown">
                   <StyledLink
-                    className="nav-link ms-3 nav-item"
+                    className="nav-link ms-3 dropdown-toggle"
                     aria-current="page"
                     to="/probiotics"
+                    role="button"
+                    data-bs-toggle="dropdown"
                   >
                     Probiotics
                   </StyledLink>
-                  {/* <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div> */}
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <Link className="dropdown-item" to="/probiotics/kombucha">
+                      Kombucha
+                    </Link>
+                    <Link className="dropdown-item" to="/probiotics/kefir">
+                      Kefir
+                    </Link>
+                    <Link className="dropdown-item" to="/probiotics/sauerkraut">
+                      Sauerkraut
+                    </Link>
+                    <div className="dropdown-divider"></div>
+                    <StyledLink className="dropdown-item" to="/probiotics">
+                      Explore All
+                    </StyledLink>
+                  </ul>
                 </li>
-                <li className="nav-item">
-                  <StyledLink className="nav-link nav-item ms-3" to="/organics">
+                <li className="nav-item dropdown">
+                  <StyledLink
+                    className="nav-link dropdown-toggle nav-item ms-3 "
+                    to="/organics"
+                    data-bs-toggle="dropdown"
+                    role="button"
+                  >
                     Organics
                   </StyledLink>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <Link className="dropdown-item" to="/organics/millets">
+                      Gluten Free Millets
+                    </Link>
+                    <Link className="dropdown-item" to="/organics/cold-pressed-oil">
+                      Cold Pressed Oil
+                    </Link>
+                    <div className="dropdown-divider"></div>
+                    <StyledLink className="dropdown-item" to="/organics">
+                      Explore All
+                    </StyledLink>
+                  </ul>
                 </li>
                 <li className="nav-item">
                   <StyledLink className="nav-link nav-item ms-3" to="/ourroots">
@@ -125,7 +153,7 @@ const NavigationBar = () => {
                 </li>
                 <li className="nav-item">
                   <StyledLink className="nav-link nav-item ms-3" to="/login">
-                    Login / Logout
+                    Login
                   </StyledLink>
                 </li>
                 <li className="nav-item">
