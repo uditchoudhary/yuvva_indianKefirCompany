@@ -6,7 +6,7 @@ import "./NavigationBar.css";
 
 const NavbarWrapper = styled.div`
   width: 80vw;
-  border-bottom: 1px solid black;
+  border-bottom: 0.2px solid rgba(185, 89, 89, 0.536);
   transition: 0.5s;
 `;
 
