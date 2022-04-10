@@ -1,4 +1,4 @@
-import BodyContainer from "../../../Containers/BodyContainer";
+import BodyContainer from "../BodyContainer";
 
 const Login = () => {
   return (

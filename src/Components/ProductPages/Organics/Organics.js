@@ -1,4 +1,4 @@
-import BodyContainer from "../../BodyContainer";
+import BodyContainer from "../../../Containers/BodyContainer";
 
 const Organics = () => {
   return (

@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./Components/Pages/LandingPage";
+import LandingPage from "./Containers/LandingPage";
 import NavigationBar from "./Components/NavigationBar";
-import OurRoots from "./Components/Pages/OurRoots";
+import OurRoots from "./Containers/OurRoots";
 import Probiotics from "./Components/ProductPages/Probiotics/";
 import Organics from "./Components/ProductPages/Organics";
-import ContactUs from "./Components/Pages/ContactUs";
-import Login from "./Components/Pages/Login";
-import Cart from "./Components/Pages/CartPage";
+import ContactUs from "./Containers/ContactUs";
+import Login from "./Containers/Login";
+import Cart from "./Containers/CartPage";
 import Footer from "./Components/Footer";
 
 function App() {
