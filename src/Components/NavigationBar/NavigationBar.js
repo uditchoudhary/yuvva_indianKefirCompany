@@ -98,13 +98,22 @@ const NavigationBar = () => {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
-                    <Link className="dropdown-item" to="/probiotics/kombucha">
+                    <Link
+                      className="dropdown-item"
+                      to="/products/probiotics/kombucha"
+                    >
                       Kombucha
                     </Link>
-                    <Link className="dropdown-item" to="/probiotics/kefir">
+                    <Link
+                      className="dropdown-item"
+                      to="/products/probiotics/kefir"
+                    >
                       Kefir
                     </Link>
-                    <Link className="dropdown-item" to="/probiotics/sauerkraut">
+                    <Link
+                      className="dropdown-item"
+                      to="/products/probiotics/sauerkraut"
+                    >
                       Sauerkraut
                     </Link>
                     <div className="dropdown-divider"></div>
@@ -126,10 +135,16 @@ const NavigationBar = () => {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
-                    <Link className="dropdown-item" to="/organics/millets">
+                    <Link
+                      className="dropdown-item"
+                      to="/products/organics/millets"
+                    >
                       Gluten Free Millets
                     </Link>
-                    <Link className="dropdown-item" to="/organics/cold-pressed-oil">
+                    <Link
+                      className="dropdown-item"
+                      to="/products/organics/cold-pressed-oil"
+                    >
                       Cold Pressed Oil
                     </Link>
                     <div className="dropdown-divider"></div>
