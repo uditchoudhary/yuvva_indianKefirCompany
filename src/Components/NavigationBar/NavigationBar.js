@@ -18,7 +18,6 @@ const NavBarLogo = styled.img`
 `;
 
 const StyledLink = styled(Link)`
-  color: var(--custom-primary1);
   text-decoration: none;
   font-weight: 500;
   &:hover {
@@ -154,7 +153,7 @@ const NavigationBar = () => {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <StyledLink className="nav-link nav-item ms-3" to="/ourroots">
+                  <StyledLink className="nav-link nav-item ms-3" to="/aboutus">
                     Our Roots
                   </StyledLink>
                 </li>

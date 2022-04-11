@@ -19,7 +19,7 @@ function App() {
       <NavigationBar />
       <div>
         <Routes>
-          <Route exact path="/ourroots" element={<OurRoots />} />
+          <Route exact path="/aboutus" element={<OurRoots />} />
           <Route exact path="/probiotics" element={<Probiotics />} />
           <Route
             exact
@@ -35,6 +35,11 @@ function App() {
           <Route exact path="/contactus" element={<ContactUs />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<Cart />} />
+
+          <Route exact path="/privacy-policy" element={<Cart />} />
+          <Route exact path="/refund-policy" element={<Cart />} />
+          <Route exact path="/terms-and-conditions" element={<Cart />} />
+
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<BrokenLink />} />
         </Routes>

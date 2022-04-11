@@ -1,6 +1,10 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../static/images/yuuva_logo-min.png";
 import { device } from "../../styles/devices";
+import ReactWhatsapp from 'react-whatsapp';
+import whatsappGif from "../../static/images/whatsapp.gif"
+import callIcon from "../../static/images/callIcon.png";
 
 const FooterWrapper = styled.div`
   height: auto;
@@ -48,8 +52,13 @@ const ImportantLinks = styled.div`
 
 const FooterCols = styled.div`
   padding: 2em;
+  & a {
+    text-decoration: none;
+    color: black;
+  }
   & > div > ul {
     list-style-type: none;
+    padding-left: 0rem;
   }
   & > div > .footer-menu-title {
     font-weight: 500;
@@ -62,11 +71,28 @@ const FooterCols = styled.div`
   & .social-icons-wrapper {
     margin-top: 20px;
   }
+  & .footer-icon {
+    width: 30px;
+    height: auto;
+  }
   @media ${device.mobile} {
     padding-top: 0px;
     padding-bottom: 0px;
   }
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    color: #b60c20;
+  }
+`;
+
+const StyledWhatsapp = styled(ReactWhatsapp)`
+  border:none;
+  background: none;
+  padding: 0;
+`
 
 const FooterLogo = styled.img`
   max-width: 150px;
@@ -90,12 +116,32 @@ const Footer = () => {
                 <div className="footer-menu-title">ALL CATEGORIES</div>
                 <hr />
                 <ul>
-                  <li>Kombucha</li>
-                  <li>Kefir</li>
-                  <li>Sauerkraut</li>
+                  <li>
+                    <StyledLink to="/products/probiotics/kombucha">
+                      Kombucha
+                    </StyledLink>
+                  </li>
+                  <li>
+                    <StyledLink to="/products/probiotics/kefir">
+                      Kefir
+                    </StyledLink>
+                  </li>
+                  <li>
+                    <StyledLink to="/products/probiotics/sauerkraut">
+                      Sauerkraut
+                    </StyledLink>
+                  </li>
 
-                  <li>Gluten Free Millets</li>
-                  <li>Cold Pressed Oil</li>
+                  <li>
+                    <StyledLink to="/products/organics/millets">
+                      Gluten Free Millets
+                    </StyledLink>
+                  </li>
+                  <li>
+                    <StyledLink to="/products/organics/cold-pressed-oil">
+                      Cold Pressed Oil
+                    </StyledLink>
+                  </li>
                 </ul>
               </div>
             </FooterCols>
@@ -105,7 +151,27 @@ const Footer = () => {
                 <hr />
                 <ul>
                   <li>Contact Us Form</li>
-                  <li>Call or Whatsapp: +91-99999999</li>
+                  <li>
+                    <a href="tel:+919654123377">
+                      Call Us{" "}
+                      <img
+                        src={callIcon}
+                        className="footer-icon"
+                        alt="call us"
+                      />
+                    </a>
+                  </li>
+                  <StyledWhatsapp
+                    number="+919654123377"
+                    message="Hello Indian Kefir Company"
+                  >
+                    WhatsApp Us{" "}
+                    <img
+                      src={whatsappGif}
+                      alt="whatsapp"
+                      className="footer-icon"
+                    />
+                  </StyledWhatsapp>
                 </ul>
               </div>
               <div className="social-icons-wrapper">
@@ -151,13 +217,23 @@ const Footer = () => {
             </FooterCols>
           </FooterSection>
           <ImportantLinks className="row row-cols-1 row-cols-md-4 imp-links">
-            <div className="footer-about-us col">About Us</div>
+            <div className="footer-about-us col">
+              <StyledLink to="/aboutus">About Us</StyledLink>
+            </div>
 
-            <div className="footer-about-us col">Privacy Policy</div>
+            <div className="footer-about-us col">
+              <StyledLink to="/privacy-policy">Privacy Policy</StyledLink>
+            </div>
 
-            <div className="footer-about-us col">Refund Policy</div>
+            <div className="footer-about-us col">
+              <StyledLink to="/refund-policy">Refund Policy</StyledLink>
+            </div>
 
-            <div className="footer-about-us col">Terms and Conditions</div>
+            <div className="footer-about-us col">
+              <StyledLink to="/terms-and-conditions">
+                Terms and Conditions
+              </StyledLink>
+            </div>
           </ImportantLinks>
           <div className="row mt-auto">
             {/* <div className="col copyright-col"></div> */}
