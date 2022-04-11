@@ -150,7 +150,6 @@ const Footer = () => {
                 <div className="footer-menu-title">CONTACT US</div>
                 <hr />
                 <ul>
-                  <li>Contact Us Form</li>
                   <li>
                     <a href="tel:+919654123377">
                       Call Us{" "}
