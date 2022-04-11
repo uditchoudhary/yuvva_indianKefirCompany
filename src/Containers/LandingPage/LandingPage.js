@@ -2,10 +2,12 @@ import BodyContainer from "../BodyContainer";
 
 const LandingPage = () => {
     return (
-        <>
-            <BodyContainer> Landing Page </BodyContainer>
-        </>
-    )
+      <>
+        <BodyContainer>
+          <h3 className="page-title">Landing Page</h3>
+        </BodyContainer>
+      </>
+    );
 }
 
 export default LandingPage;

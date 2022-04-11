@@ -8,7 +8,7 @@ const ProductCategoryPage = () => {
 
   return (
     <BodyContainer>
-        <h1>Product Category Page</h1>
+      <h3 className="page-title"> Product Category Page </h3>
       <h2>Product category: {productCategory}</h2>
       <h2>Product type: {productName}</h2>
     </BodyContainer>

@@ -3,7 +3,9 @@ import BodyContainer from "../BodyContainer";
 const OurRoots = () => {
   return (
     <>
-      <BodyContainer> OurRoots </BodyContainer>
+      <BodyContainer>
+        <h3 className="page-title"> About Us & Our Roots </h3>
+      </BodyContainer>
     </>
   );
 };

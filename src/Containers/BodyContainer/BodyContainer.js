@@ -8,8 +8,14 @@ const Container = styled.div`
   height: auto;
   // height: 61vh;
   // background-color: #b60c2040;
+  padding-top: 4em;
+  padding-bottom: 4em;
   @media ${device.mobile} {
     width: 100vw;
+  }
+  & .page-title {
+    text-align: center;
+    color: #b60c20;
   }
 `;
 

@@ -5,8 +5,8 @@ const ContactUsWrapper = styled.div`
   margin-left: 2em;
   margin-right: 2em;
 
-  padding-top: 4em;
-  padding-bottom: 4em;
+  
+
 `;
 
 const ContactUs = () => {
@@ -14,7 +14,7 @@ const ContactUs = () => {
     <>
       <BodyContainer>
         <ContactUsWrapper>
-          <h3>Drop us a Message, Feedback or Review </h3>
+          <h3 className="page-title">Drop us a Message, Feedback or Review </h3>
           <form className="mt-4">
             <div className="input-group input-group-sm mb-3">
               <span className="input-group-text">Full Name: </span>

@@ -2,8 +2,10 @@ import BodyContainer from "../BodyContainer"
 
 export const PrivacyPolicy = () => {
     return (
-        <>
-        <BodyContainer> Privacy Policies will come here</BodyContainer>
-        </>
-    )
+      <>
+        <BodyContainer>
+          <h3 className="page-title"> Privacy Policies will come here </h3>
+        </BodyContainer>
+      </>
+    );
 }

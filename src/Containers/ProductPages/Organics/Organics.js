@@ -3,7 +3,9 @@ import BodyContainer from "../../BodyContainer";
 const Organics = () => {
   return (
     <>
-      <BodyContainer> Organics </BodyContainer>
+      <BodyContainer>
+        <h3 className="page-title"> Organics </h3>
+      </BodyContainer>
     </>
   );
 };
