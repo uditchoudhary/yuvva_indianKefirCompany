@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import logo from "../../static/images/yuuva_logo-min.png";
+import { device } from "../../styles/devices";
 
 const NavbarWrapper = styled.div`
   width: 80vw;
@@ -9,6 +10,9 @@ const NavbarWrapper = styled.div`
   transition: 0.5s;
   & .dropdown-menu {
     border: none;
+  }
+  @media ${device.mobile} {
+    width: 100vw;
   }
 `;
 
