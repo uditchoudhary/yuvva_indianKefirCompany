@@ -9,6 +9,7 @@ import callIcon from "../../static/images/callIcon.png";
 const FooterWrapper = styled.div`
   height: auto;
   width: 80vw;
+  border-top: 0.1px solid #b60c2040;
   & .footer-logo {
     // @media (max-width: 800px) {
     @media ${device.tablet} {
@@ -18,6 +19,9 @@ const FooterWrapper = styled.div`
       margin-left: 45px;
       margin-top: 45px;
     }
+  }
+  @media ${device.mobile} {
+    width: 100vw;
   }
 `;
 
@@ -59,11 +63,19 @@ const FooterCols = styled.div`
   & > div > ul {
     list-style-type: none;
     padding-left: 0rem;
+    @media ${device.mobile} {
+      font-size: 14px;
+    }
   }
   & > div > .footer-menu-title {
     font-weight: 500;
     margin: 0;
     letter-spacing: 3px;
+    @media ${device.mobile} {
+      letter-spacing: 1px;
+      padding-top: 5px;
+      font-size: 14px;
+    }
   }
   & > div > hr {
     width: 50%;
