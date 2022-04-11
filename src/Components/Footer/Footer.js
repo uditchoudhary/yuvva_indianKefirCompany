@@ -154,6 +154,11 @@ const Footer = () => {
                       Cold Pressed Oil
                     </StyledLink>
                   </li>
+                  <li>
+                    <StyledLink to="/products/all">
+                      Shop all
+                    </StyledLink>
+                  </li>
                 </ul>
               </div>
             </FooterCols>

@@ -4,9 +4,6 @@ import styled from "styled-components";
 const ContactUsWrapper = styled.div`
   margin-left: 2em;
   margin-right: 2em;
-
-  
-
 `;
 
 const ContactUs = () => {
