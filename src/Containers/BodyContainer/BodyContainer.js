@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 80vw;
   height: auto;
   // height: 61vh;
-  background-color: #b60c2040;
+  // background-color: #b60c2040;
   @media ${device.mobile} {
     width: 100vw;
   }
