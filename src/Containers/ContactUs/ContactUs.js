@@ -15,7 +15,6 @@ const ErrorMessage = styled.span`
 `;
 
 const SuccessMessage = styled.div`
-  // border: 1px solid black;
   text-align: center;
   color: green;
 `;
@@ -44,11 +43,10 @@ const ContactUs = () => {
   const watchReason = watch(["reason", "reviewItem"]);
 
   const onChangeReCaptcha = (value) => {
-    console.log(value);
     setCaptchaValue(value);
   };
 
-  const onSubmit = (formData) => {
+  const onSubmit = formData => {
     const data = { ...formData, "g-recaptcha-response": captchaValue };
     setReason(watchReason[0]);
     setIsLoading(true);
