@@ -1,6 +1,9 @@
 import BodyContainer from "../BodyContainer";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import emailjs from "emailjs-com";
+import ReCAPTCHA from "react-google-recaptcha";
+// import { useState } from "react";
 
 const ContactUsWrapper = styled.div`
   margin-left: 2em;
@@ -8,15 +11,18 @@ const ContactUsWrapper = styled.div`
 `;
 
 const ErrorMessage = styled.span`
-  color: red
-`
+  color: red;
+`;
 
 const ContactUs = () => {
+  // const [captchaValue, setCaptchaValue ] = useState("");
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
+    setValue
   } = useForm({
     defaultValues: {
       name: "",
@@ -25,13 +31,36 @@ const ContactUs = () => {
       message: "",
       reviewItem: "",
     },
+    mode: 'onChange'
   });
 
-  const watchReason = watch(["reason","reviewItem"]);
+  const watchReason = watch(["reason", "reviewItem"]);
 
-  const onSubmit = (data) => {
-    const { name, email, reason, message, reviewItem } = data;
-    alert(`Name: ${name}, Email: ${email}, Reason: ${reason}, ReviewItem: ${reviewItem} , Message: ${message}`)
+  const onChangeReCaptcha = (value) => {
+    console.log(value)
+    // setCaptchaValue(value)
+  };
+
+  const onSubmit = (formData) => {
+    // console.log("captchaValue: ", captchaValue);
+    // const data = {...formData, "g-recaptcha-response":captchaValue}
+    console.log(formData);
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        formData,
+        process.env.REACT_APP_EMAILJS_SERVICE_KEY
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    reset();
   };
 
   return (
@@ -151,9 +180,17 @@ const ContactUs = () => {
                 {errors.message && (
                   <ErrorMessage>{errors.message.message}</ErrorMessage>
                 )}
-                <label htmlFor="message">{watchReason[0] === "review"? `Please write down review of ${watchReason[1]}` : "Leave a message here.."}</label>
+                <label htmlFor="message">
+                  {watchReason[0] === "review"
+                    ? `Please write down review of ${watchReason[1]}`
+                    : "Leave a message here.."}
+                </label>
               </div>
             </div>
+            {/* <ReCAPTCHA
+              sitekey={process.env.REACT_APP_RECAPTCHA_V2_SITE_KEY}
+              onChange={onChangeReCaptcha}
+            /> */}
             <div className="row mb-3">
               <div className="col text-center">
                 <button type="submit" className="btn btn-primary ">
