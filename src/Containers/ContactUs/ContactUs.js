@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import ReCAPTCHA from "react-google-recaptcha";
-// import { useState } from "react";
+import { useState } from "react";
 
 const ContactUsWrapper = styled.div`
   margin-left: 2em;
@@ -15,14 +15,13 @@ const ErrorMessage = styled.span`
 `;
 
 const ContactUs = () => {
-  // const [captchaValue, setCaptchaValue ] = useState("");
+  const [captchaValue, setCaptchaValue ] = useState("");
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-    setValue
   } = useForm({
     defaultValues: {
       name: "",
@@ -38,18 +37,18 @@ const ContactUs = () => {
 
   const onChangeReCaptcha = (value) => {
     console.log(value)
-    // setCaptchaValue(value)
+    setCaptchaValue(value)
   };
 
   const onSubmit = (formData) => {
-    // console.log("captchaValue: ", captchaValue);
-    // const data = {...formData, "g-recaptcha-response":captchaValue}
-    console.log(formData);
+    console.log("captchaValue: ", captchaValue);
+    const data = {...formData, 'g-recaptcha-response':captchaValue}
+    console.log(data);
     emailjs
       .send(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
         process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-        formData,
+        data,
         process.env.REACT_APP_EMAILJS_SERVICE_KEY
       )
       .then(
@@ -187,10 +186,10 @@ const ContactUs = () => {
                 </label>
               </div>
             </div>
-            {/* <ReCAPTCHA
+            <ReCAPTCHA
               sitekey={process.env.REACT_APP_RECAPTCHA_V2_SITE_KEY}
               onChange={onChangeReCaptcha}
-            /> */}
+            />
             <div className="row mb-3">
               <div className="col text-center">
                 <button type="submit" className="btn btn-primary ">
