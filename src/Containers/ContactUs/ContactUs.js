@@ -12,48 +12,6 @@ const ContactUs = () => {
       <BodyContainer>
         <ContactUsWrapper>
           <h3 className="page-title">Drop us a Message, Feedback or Review </h3>
-          <form className="mt-4">
-            <div className="input-group input-group-sm mb-3">
-              <span className="input-group-text">Full Name: </span>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                placeholder="What's your full name?"
-              />
-            </div>
-            <div className="input-group input-group-sm mb-3">
-              <span className="input-group-text">Email: </span>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div className="input-group input-group-sm mb-3">
-              <span className="input-group-text">Select a reason: </span>
-              <select className="form-select" aria-label="Reason to message">
-                <option value="message" selected>
-                  Message
-                </option>
-                <option value="review">Review</option>
-                <option value="feedback">Feedback</option>
-              </select>
-            </div>
-
-            <div className="input-group mb-3">
-              <span className="input-group-text">Message...</span>
-              <textarea
-                className="form-control"
-                aria-label="text message"
-              ></textarea>
-            </div>
-          </form>
-          <hr />
-          OR
-          <hr />
           <div className="row g-3 mb-3">
             <div className="col-md">
               <div className="form-floating">
@@ -115,6 +73,7 @@ const ContactUs = () => {
               </button>
             </div>
           </div>
+
         </ContactUsWrapper>
       </BodyContainer>
     </>
