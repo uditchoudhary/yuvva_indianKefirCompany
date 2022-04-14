@@ -14,8 +14,16 @@ const ErrorMessage = styled.span`
   color: red;
 `;
 
+const SuccessMessage = styled.div`
+  // border: 1px solid black;
+  text-align: center;
+  color: green;
+`;
 const ContactUs = () => {
-  const [captchaValue, setCaptchaValue ] = useState("");
+  const [captchaValue, setCaptchaValue] = useState("");
+  const [messageSent, setMessageSent] = useState(false);
+  const [reason, setReason] = useState("");
+  const [isloading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -30,20 +38,20 @@ const ContactUs = () => {
       message: "",
       reviewItem: "",
     },
-    mode: 'onChange'
+    mode: "onChange",
   });
 
   const watchReason = watch(["reason", "reviewItem"]);
 
   const onChangeReCaptcha = (value) => {
-    console.log(value)
-    setCaptchaValue(value)
+    console.log(value);
+    setCaptchaValue(value);
   };
 
   const onSubmit = (formData) => {
-    console.log("captchaValue: ", captchaValue);
-    const data = {...formData, 'g-recaptcha-response':captchaValue}
-    console.log(data);
+    const data = { ...formData, "g-recaptcha-response": captchaValue };
+    setReason(watchReason[0]);
+    setIsLoading(true);
     emailjs
       .send(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -54,11 +62,13 @@ const ContactUs = () => {
       .then(
         (result) => {
           console.log(result.text);
+          setMessageSent(true);
         },
         (error) => {
           console.log(error.text);
         }
       );
+    setIsLoading(false);
     reset();
   };
 
@@ -190,10 +200,15 @@ const ContactUs = () => {
               sitekey={process.env.REACT_APP_RECAPTCHA_V2_SITE_KEY}
               onChange={onChangeReCaptcha}
             />
+            {messageSent && (
+              <SuccessMessage className="row m-2 text-center">
+                <span>Your {reason} has been submitted</span>
+              </SuccessMessage>
+            )}
             <div className="row mb-3">
               <div className="col text-center">
                 <button type="submit" className="btn btn-primary ">
-                  Submit
+                  {isloading ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </div>
