@@ -15,6 +15,7 @@ const ContactUs = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -22,12 +23,15 @@ const ContactUs = () => {
       email: "",
       reason: "message",
       message: "",
+      reviewItem: "",
     },
   });
 
+  const watchReason = watch(["reason","reviewItem"]);
+
   const onSubmit = (data) => {
-    const { name, email, reason, message } = data;
-    alert(`Name: ${name}, Email: ${email}, Reason: ${reason}, Message: ${message}`)
+    const { name, email, reason, message, reviewItem } = data;
+    alert(`Name: ${name}, Email: ${email}, Reason: ${reason}, ReviewItem: ${reviewItem} , Message: ${message}`)
   };
 
   return (
@@ -90,7 +94,9 @@ const ContactUs = () => {
                     className="form-select"
                     id="reason"
                     aria-label="select reason"
-                    {...register("reason", {required: "Please select a reason to message"})}
+                    {...register("reason", {
+                      required: "Please select a reason to message",
+                    })}
                   >
                     <option value="message">Message</option>
                     <option value="review">Review</option>
@@ -103,6 +109,35 @@ const ContactUs = () => {
                 </div>
               </div>
             </div>
+            {/*
+            Watching reason starts here
+             */}
+            {watchReason[0] === "review" && (
+              <div className="row mb-3">
+                <div className="col-md">
+                  <div className="form-floating">
+                    <select
+                      className="form-select"
+                      id="reviewItem"
+                      aria-label="select item to review"
+                      {...register("reviewItem", {
+                        required: "Please select an item to review",
+                      })}
+                    >
+                      {/* Hardcoding values here at the moment but should fetch from the server */}
+                      <option value="kombucha">Kombucha</option>
+                      <option value="kefir">Kefir</option>
+                      <option value="sauerkraut">Sauerkraut</option>
+                    </select>
+                    {errors.reviewItem && (
+                      <ErrorMessage>{errors.reviewItem.message}</ErrorMessage>
+                    )}
+                    <label htmlFor="reviewItem">Select item:</label>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="row mb-3">
               <div className="form-floating">
                 <textarea
@@ -116,7 +151,7 @@ const ContactUs = () => {
                 {errors.message && (
                   <ErrorMessage>{errors.message.message}</ErrorMessage>
                 )}
-                <label htmlFor="message">Leave a message here..</label>
+                <label htmlFor="message">{watchReason[0] === "review"? `Please write down review of ${watchReason[1]}` : "Leave a message here.."}</label>
               </div>
             </div>
             <div className="row mb-3">
