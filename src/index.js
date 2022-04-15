@@ -6,6 +6,7 @@ import { CookiesProvider } from "react-cookie";
 import rootReducer from "./Store/Reducers/GlobalReducer";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(rootReducer);
 
@@ -20,3 +21,5 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+serviceWorker.register();
