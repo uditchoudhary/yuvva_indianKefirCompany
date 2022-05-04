@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import logo from "../../static/images/yuuva_logo-min.png";
+import logo from "../../static/images/yuvva_logo_small.jpg";
 import { device } from "../../styles/devices";
+import { useSelector, useDispatch } from "react-redux";
+import LogInOut from "../../Store/Actions/Actions";
 
 const NavbarWrapper = styled.div`
   width: 80vw;
@@ -32,7 +34,18 @@ const StyledLink = styled(Link)`
 
 const NavigationBar = () => {
   const navBarRef = useRef(null);
+  const dispatch = useDispatch();
 
+  const handleLogInOutButtonClick = (e) => {
+    const action = e.target.innerText;
+    if (action === "Log out") {
+      dispatch(LogInOut(false));
+    } else {
+      dispatch(LogInOut(true));
+    }
+  };
+
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const onScroll = () => {
     if (
       document.body.scrollTop > 20 ||
@@ -170,9 +183,22 @@ const NavigationBar = () => {
                   </StyledLink>
                 </li>
                 <li className="nav-item">
-                  <StyledLink className="nav-link nav-item ms-3" to="/login">
-                    Login
-                  </StyledLink>
+                  {isLoggedIn ? (
+                    <StyledLink
+                      className="nav-link nav-item ms-3"
+                      to="/"
+                      onClick={handleLogInOutButtonClick}
+                    >
+                      Log out
+                    </StyledLink>
+                  ) : (
+                    <StyledLink
+                      className="nav-link nav-item ms-3"
+                      to="/login"
+                    >
+                      Log in
+                    </StyledLink>
+                  )}
                 </li>
                 <li className="nav-item">
                   <StyledLink className="nav-link nav-item ms-3" to="/cart">

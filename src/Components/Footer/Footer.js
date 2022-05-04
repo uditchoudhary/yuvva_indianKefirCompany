@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../static/images/yuuva_logo-min.png";
+import logo from "../../static/images/yuvva_logo_small.jpg";
 import { device } from "../../styles/devices";
 import ReactWhatsapp from "react-whatsapp";
 import whatsappGif from "../../static/images/whatsapp.gif";

@@ -1,6 +1,6 @@
 import * as actiontypes from "./ActionTypes";
 
-const LogInOut = (loginStatus) => {
+const LogInOut = (loginStatus, formData) => {
   if (loginStatus) {
     return { type: actiontypes.LOG_IN };
   } else {

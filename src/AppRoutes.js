@@ -13,6 +13,7 @@ import Cart from "./Containers/CartPage";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./Containers/LandingPage";
 import AllProducts from "./Containers/ProductPages/AllProducts";
+import UserProfilePage from "./Containers/UserProfilePage";
 
 export const AppRoutes = () => {
   return (
@@ -26,7 +27,7 @@ export const AppRoutes = () => {
           element={<ProductCategoryPage />}
         />
         <Route exact path="/product/:id/details" element={<ProductDetails />} />
-        <Route exact path="/products/all" element={<AllProducts/>} />
+        <Route exact path="/products/all" element={<AllProducts />} />
         <Route exact path="/organics" element={<Organics />} />
         <Route exact path="/contactus" element={<ContactUs />} />
         <Route exact path="/login" element={<Login />} />
@@ -34,6 +35,7 @@ export const AppRoutes = () => {
 
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route exact path="/refund-policy" element={<RefundPolicy />} />
+        <Route exact path="/profile" element={<UserProfilePage />} />
         <Route
           exact
           path="/terms-and-conditions"

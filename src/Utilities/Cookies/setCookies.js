@@ -6,7 +6,7 @@ const setCookies = (cookieName, cookieValue) => {
   var cookies = new Cookies();
   cookies.set(cookieName, cookieValue, {
     path: "/",
-    expires: new Date(Date.now() + 5000),
+    expires: new Date(Date.now() + 60000 * 30),
   });
 };
 
