@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import BodyContainer from "../BodyContainer";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,6 +15,15 @@ const Login = () => {
   const [isloading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      navigate("/profile");
+    }
+  }, [isLoggedIn, navigate]);
+
   const {
     register,
     handleSubmit,
@@ -30,21 +39,13 @@ const Login = () => {
 
   const onSubmit = (body) => {
     setIsLoading(true);
-    axios
-      .post(
-        `http://yuvva-auth.herokuapp.com/api/auth/login`,
-        {
-          email: "admin@test.com",
-          password: "password",
-        }
-      )
-      .then((res) => {
-        console.log(res.data.auth);
-        dispatch(LogInOut(true));
-      });
+    axios.post(`${process.env.REACT_APP_AUTH_API}/login`, body).then((res) => {
+      console.log(res.data.auth);
+      dispatch(LogInOut(true));
+    });
+    navigate("/profile");
     setIsLoading(false);
     reset();
-    navigate("/profile");
   };
 
   return (

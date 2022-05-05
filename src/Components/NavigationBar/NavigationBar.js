@@ -216,11 +216,13 @@ const NavigationBar = () => {
                     </StyledLink>
                   )}
                 </li>
-                <li className="nav-item">
-                  <StyledLink className="nav-link nav-item ms-3" to="/cart">
-                    Cart (0)
-                  </StyledLink>
-                </li>
+                {isLoggedIn && (
+                  <li className="nav-item">
+                    <StyledLink className="nav-link nav-item ms-3" to="/cart">
+                      Cart (0)
+                    </StyledLink>
+                  </li>
+                )}
               </ul>
             </div>
           </nav>
