@@ -182,20 +182,36 @@ const NavigationBar = () => {
                     Contact Us
                   </StyledLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item dropdown">
                   {isLoggedIn ? (
-                    <StyledLink
-                      className="nav-link nav-item ms-3"
-                      to="/"
-                      onClick={handleLogInOutButtonClick}
-                    >
-                      Log out
-                    </StyledLink>
+                    <div>
+                      <StyledLink
+                        className="nav-link ms-3 dropdown-toggle"
+                        aria-current="page"
+                        to="/profile"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                      >
+                        Profile
+                      </StyledLink>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="navbarDropdown"
+                      >
+                        <Link className="dropdown-item" to="/profile">
+                          Profile
+                        </Link>
+                        <Link
+                          className="dropdown-item"
+                          to="/"
+                          onClick={handleLogInOutButtonClick}
+                        >
+                          Log out
+                        </Link>
+                      </ul>
+                    </div>
                   ) : (
-                    <StyledLink
-                      className="nav-link nav-item ms-3"
-                      to="/login"
-                    >
+                    <StyledLink className="nav-link nav-item ms-3" to="/login">
                       Log in
                     </StyledLink>
                   )}
