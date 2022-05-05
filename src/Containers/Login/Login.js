@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import setCookies from "../../Utilities/Cookies/setCookies";
+import { authInstance as AUTH_API } from "../../services/axiosConfig";
 
 const ErrorMessage = styled.span`
   color: red;
@@ -13,6 +14,7 @@ const ErrorMessage = styled.span`
 
 const Login = () => {
   const [isloading, setIsLoading] = useState(false);
+  const [loginError, setLoginError] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
@@ -39,13 +41,23 @@ const Login = () => {
 
   const onSubmit = (body) => {
     setIsLoading(true);
-    axios.post(`${process.env.REACT_APP_AUTH_API}/login`, body).then((res) => {
-      console.log(res.data.auth);
-      dispatch(LogInOut(true));
-    });
-    navigate("/profile");
+    AUTH_API.post(`/login`, body)
+      .then((res) => {
+        console.log("setting token", res.data.token);
+        setCookies("ACCESS_TOKEN", res.data.token);
+        dispatch(LogInOut(true));
+        navigate("/profile");
+        reset();
+      })
+      .catch((err) => {
+        console.log("ERROR ", err.response.status);
+        if (err.response.status === 500) {
+          setLoginError("Something went wrong");
+        } else {
+          setLoginError("Invalid email or password");
+        }
+      });
     setIsLoading(false);
-    reset();
   };
 
   return (
@@ -92,6 +104,11 @@ const Login = () => {
           </div>
           <div className="row mb-3">
             <div className="col text-center">
+              {loginError && (
+                <p>
+                  <ErrorMessage>{loginError}</ErrorMessage>
+                </p>
+              )}
               <button type="submit" className="btn btn-primary ">
                 {isloading ? "Loging in..." : "Submit"}
               </button>

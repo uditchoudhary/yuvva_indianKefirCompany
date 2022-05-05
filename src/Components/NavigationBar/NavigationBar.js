@@ -5,6 +5,7 @@ import logo from "../../static/images/yuvva_logo_small.jpg";
 import { device } from "../../styles/devices";
 import { useSelector, useDispatch } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
+import removeCookies from "../../Utilities/Cookies/removeCookies";
 
 const NavbarWrapper = styled.div`
   width: 80vw;
@@ -40,8 +41,7 @@ const NavigationBar = () => {
     const action = e.target.innerText;
     if (action === "Log out") {
       dispatch(LogInOut(false));
-    } else {
-      dispatch(LogInOut(true));
+      removeCookies("ACCESS_TOKEN");
     }
   };
 
