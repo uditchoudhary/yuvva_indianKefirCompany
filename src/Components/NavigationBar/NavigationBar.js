@@ -5,7 +5,9 @@ import logo from "../../static/images/yuvva_logo_small.jpg";
 import { device } from "../../styles/devices";
 import { useSelector, useDispatch } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
-import removeCookies from "../../Utilities/Cookies/removeCookies";
+import { authInstance as AUTH_API } from "../../services/axiosConfig";
+import { useNavigate } from "react-router-dom";
+
 
 const NavbarWrapper = styled.div`
   width: 80vw;
@@ -36,12 +38,16 @@ const StyledLink = styled(Link)`
 const NavigationBar = () => {
   const navBarRef = useRef(null);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleLogInOutButtonClick = (e) => {
     const action = e.target.innerText;
     if (action === "Log out") {
-      dispatch(LogInOut(false));
-      removeCookies("ACCESS_TOKEN");
+      AUTH_API.get(`/logout`).then((res) => {
+        console.log("deleting token", res.data);
+        // setCookies("ACCESS_TOKEN", res.data.token);
+        // navigate("/login");
+        dispatch(LogInOut(false));
+      });
     }
   };
 

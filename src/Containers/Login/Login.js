@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
 import { useNavigate } from "react-router-dom";
-import setCookies from "../../Utilities/Cookies/setCookies";
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
 
 const ErrorMessage = styled.span`
@@ -44,13 +43,12 @@ const Login = () => {
     AUTH_API.post(`/login`, body)
       .then((res) => {
         console.log("setting token", res.data.token);
-        setCookies("ACCESS_TOKEN", res.data.token);
         dispatch(LogInOut(true));
         navigate("/profile");
         reset();
       })
       .catch((err) => {
-        console.log("ERROR ", err.response.status);
+        console.log("ERROR ", err);
         if (err.response.status === 500) {
           setLoginError("Something went wrong");
         } else {
