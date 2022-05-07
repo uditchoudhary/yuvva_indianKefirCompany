@@ -30,7 +30,21 @@ const UserProfilePage = () => {
           }
         });
   }, [isLoggedIn]);
-
+const handleAddress = () => {
+  AUTH_API.post(`/updateAddress`, {"address":"S new address dgf"})
+        .then((res) => {
+          console.log(res);
+          setUser(res.data);
+        })
+        .catch((err) => {
+          console.log("ERROR ", err.response.status);
+          if (err.response.status === 404) {
+            setUserProfileError("User not valid. Login please");
+          } else {
+            setUserProfileError("Oooops...!!! Something Went Wrong");
+          }
+        });
+}
   return (
     <>
       <BodyContainer>
@@ -42,6 +56,8 @@ const UserProfilePage = () => {
             <p>{user.email}</p>
             <p>{user.phone}</p>
             <p>{user.isAdmin && "Admin user"}</p>
+            <p>{user.address ? `Address found ${user.address}- Edit Address`:"Add Address"}</p>
+            <button onClick={() => handleAddress()}> Add or Edit Address </button>
           </div>
         )}
       </BodyContainer>

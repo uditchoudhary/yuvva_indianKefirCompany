@@ -47,7 +47,7 @@ const RegisterPage = () => {
       password: "",
       phone: "",
     },
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onRegisterSubmit = (body) => {
