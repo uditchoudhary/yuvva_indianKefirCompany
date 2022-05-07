@@ -11,7 +11,7 @@ const ErrorMessage = styled.span`
   color: red;
 `;
 
-const Login = () => {
+const LoginPage = () => {
   const [isloading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState();
   const dispatch = useDispatch();
@@ -38,11 +38,10 @@ const Login = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (body) => {
+  const onLoginSubmit = (body) => {
     setIsLoading(true);
     AUTH_API.post(`/login`, body)
       .then((res) => {
-        console.log("setting token", res.data.token);
         dispatch(LogInOut(true));
         navigate("/profile");
         reset();
@@ -58,11 +57,13 @@ const Login = () => {
     setIsLoading(false);
   };
 
-  return (
-    <>
-      <BodyContainer>
-        <h3 className="page-title"> Login or Register here </h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
+  const LoginContainer = () => {
+    return (
+      <>
+        <form onSubmit={handleSubmit(onLoginSubmit)}>
           <div className="row g-3 mb-3">
             <div className="col-md">
               <div className="form-floating">
@@ -107,17 +108,38 @@ const Login = () => {
                   <ErrorMessage>{loginError}</ErrorMessage>
                 </p>
               )}
-              <button type="submit" className="btn btn-primary ">
+              <button type="submit" className="btn btn-primary">
                 {isloading ? "Loging in..." : "Submit"}
               </button>
             </div>
           </div>
         </form>
+        <div className="row mb-3">
+          <div className="col text-center">
+            <span>Not Registered?</span>
+            <button
+              className="btn btn-sm btn-secondary "
+              style={{ marginLeft: "20px" }}
+              onClick={handleRegisterClick}
+            >
+              Create Account
+            </button>
+          </div>
+        </div>
         <p>Admin: admin@test.com / password</p>
         <p>User: user@test.com / password</p>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <BodyContainer>
+        <h3 className="page-title">Login</h3>
+        <LoginContainer />
       </BodyContainer>
     </>
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -8,7 +8,8 @@ import OurRoots from "./Containers/OurRoots";
 import Probiotics from "./Containers/ProductPages/Probiotics";
 import Organics from "./Containers/ProductPages/Organics";
 import ContactUs from "./Containers/ContactUs";
-import Login from "./Containers/Login";
+import LoginPage from "./Containers/LoginPage";
+import RegisterPage from "./Containers/RegisterPage";
 import Cart from "./Containers/CartPage";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./Containers/LandingPage";
@@ -30,7 +31,8 @@ export const AppRoutes = () => {
         <Route exact path="/products/all" element={<AllProducts />} />
         <Route exact path="/organics" element={<Organics />} />
         <Route exact path="/contactus" element={<ContactUs />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/register" element={<RegisterPage />} />
         <Route exact path="/cart" element={<Cart />} />
 
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
