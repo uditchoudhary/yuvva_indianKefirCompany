@@ -17,6 +17,10 @@ const Container = styled.div`
     text-align: center;
     color: #b60c20;
   }
+  .spinner {
+    text-align: center;
+    margin-top: 4em;
+  }
 `;
 
 const BodyContainer = ({ children }) => {

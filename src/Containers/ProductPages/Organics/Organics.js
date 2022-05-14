@@ -10,15 +10,23 @@ const Organics = () => {
     setIsloading(true);
     axios.get(`${process.env.REACT_APP_API}/organics`).then((res) => {
       setOrganicsProducts(res.data);
+      setIsloading(false);
     });
-    setIsloading(false);
   }, []);
   return (
     <>
       <BodyContainer>
         <h3 className="page-title"> Organics </h3>
         {isLoading ? (
-          <h2>loading....</h2>
+          <div className="spinner">
+            <div
+              className="spinner-border"
+              style={{ width: "3rem", height: "3rem" }}
+              role="status"
+            >
+              <span class="sr-only"></span>
+            </div>
+          </div>
         ) : (
           <div>
             {organicsProducts.map((organicsProduct) => {
