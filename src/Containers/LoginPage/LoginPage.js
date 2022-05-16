@@ -19,7 +19,6 @@ const LoginPage = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (isLoggedIn) {
       navigate("/profile");
     }

@@ -27,7 +27,6 @@ const RegisterPage = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (isLoggedIn) {
       navigate("/profile");
     }
@@ -57,6 +56,7 @@ const RegisterPage = () => {
         // dispatch(LogInOut(true));
         // navigate("/login");
         setRegisterSuccess(true);
+        setRegisterError("");
         reset();
       })
       .catch((err) => {

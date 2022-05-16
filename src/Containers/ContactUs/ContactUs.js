@@ -59,7 +59,6 @@ const ContactUs = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
           setMessageSent(true);
         },
         (error) => {

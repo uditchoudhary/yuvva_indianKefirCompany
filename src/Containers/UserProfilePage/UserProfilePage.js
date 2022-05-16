@@ -24,12 +24,6 @@ const ProfileCol = styled.div`
   &.order-history {
     text-align: right;
   }
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 10px;
-    background-color: #f2f2f2;
-  }
 `;
 
 const StyledPara = styled.p`
@@ -44,7 +38,26 @@ const StyledPara = styled.p`
 `;
 
 const StyledButton = styled.button`
-  margin-right: 20px;
+  margin: 20px 0px 20px 20px;
+  border: none;
+`;
+
+const AddressFormUl = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    margin-left: 0;
+    input {
+      border: none;
+      border-bottom: 1px solid black;
+      &.submitButton {
+        border: none;
+        margin-left: 150px;
+        margin-top: 10px;
+      }
+    }
+  }
 `;
 
 const UserProfilePage = () => {
@@ -53,38 +66,49 @@ const UserProfilePage = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isAddress, setIsAddress] = useState(false);
-  console.log(isLoggedIn);
+  const [enableAddressOption, setEnableAddressOption] = useState(false);
+
+  const [addressInputs, setAddressInputs] = useState({});
+
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(isLoggedIn);
     setIsLoading(true);
     if (!isLoggedIn) {
       navigate("/login");
     }
     AUTH_API.get(`/profile`)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
         setIsLoading(false);
         if (res.data.address) setIsAddress(true);
       })
       .catch((err) => {
         console.log("ERROR ", err.response.status);
+        setIsLoading(false);
+
         if (err.response.status === 404) {
           setUserProfileError("User not valid. Login please");
         } else {
           setUserProfileError("Oooops...!!! Something Went Wrong");
         }
-        setIsLoading(false);
       });
-  }, [isAddress]);
+  }, []);
 
-  const handleAddress = (body) => {
+  const handleAddressChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setAddressInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleAddress = (e, body) => {
+    e.preventDefault();
+    console.log(`Body: ${body}`);
     AUTH_API.post(`/updateAddress`, body)
       .then((res) => {
         console.log(res);
         setUser(res.data);
         setIsAddress(true);
+        setEnableAddressOption(false);
       })
       .catch((err) => {
         console.log("ERROR ", err.response.status);
@@ -93,6 +117,7 @@ const UserProfilePage = () => {
         } else {
           setUserProfileError("Oooops...!!! Something Went Wrong");
         }
+        setEnableAddressOption(false);
       });
   };
   if (isLoading) {
@@ -124,51 +149,108 @@ const UserProfilePage = () => {
                 <h5>Account Details:</h5>
                 <StyledPara className="userName">{user.name}</StyledPara>
                 <StyledPara>{user.email}</StyledPara>
-                <input
-                  disabled={true}
+                {/* <input
+                  disabled={false}
                   value={user.email}
                   style={{ border: "none", width: "100%" }}
-                />
+                /> */}
                 <StyledPara>{user.phone}</StyledPara>
                 <StyledPara>{user.isAdmin && "Admin"}</StyledPara>
-                {isAddress && (
-                  <ul>
-                    <li>{user.address}</li>
-                    <li>next line</li>
-                    <li>next line</li>
-                    <li>
-                      <StyledButton
-                        className="btn btn-link btn-sm"
-                        onClick={() =>
-                          handleAddress({ address: "S new address dgf" })
-                        }
-                      >
-                        Edit Address
-                      </StyledButton>
-                    </li>
-                  </ul>
+                {isAddress ? (
+                  !enableAddressOption ? (
+                    <AddressFormUl>
+                      <li>{user.address.line1}</li>
+                      <li>{user.address.line2}</li>
+                      <li>{user.address.line3}</li>
+                      <li>
+                        {user.address[0]}
+                        <StyledButton
+                          onClick={() => setEnableAddressOption(true)}
+                        >
+                          Edit
+                        </StyledButton>
+                      </li>
+                    </AddressFormUl>
+                  ) : (
+                    <AddressFormUl>
+                      <form>
+                        <li>
+                          <label>
+                            <input
+                              type="text"
+                              name="line1"
+                              value={addressInputs.line1 || user.address.line1}
+                              onChange={handleAddressChange}
+                            />
+                          </label>
+                        </li>
+                        <li>
+                          <label>
+                            <input
+                              type="text"
+                              name="line2"
+                              value={addressInputs.line2 || user.address.line2}
+                              onChange={handleAddressChange}
+                            />
+                          </label>
+                        </li>
+                        <li>
+                          <label>
+                            <input
+                              type="text"
+                              name="line3"
+                              value={addressInputs.line3 || user.address.line3}
+                              onChange={handleAddressChange}
+                            />
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="button"
+                            value="Submit"
+                            className="submitButton"
+                            onClick={(event) =>
+                              handleAddress(event, {
+                                address: {
+                                  line1: addressInputs.line1,
+                                  line2: addressInputs.line2,
+                                  line3: addressInputs.line3,
+                                },
+                              })
+                            }
+                          />
+                        </li>
+                      </form>
+                    </AddressFormUl>
+                  )
+                ) : (
+                  <>Add Address</>
                 )}
 
                 <StyledButton
                   className="btn btn-secondary"
-                  onClick={() =>
-                    handleAddress({
-                      address: "240D Blockhouse Bay Road, Avondale",
+                  onClick={(event) =>
+                    handleAddress(event, {
+                      address: {
+                        line1: "some address 1",
+                        line2: "Some address 2",
+                        line3: "some address 3",
+                      },
                     })
                   }
                 >
                   Update Details
                 </StyledButton>
-                <button
+                {/* <StyledButton
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModalCenter"
                 >
                   Launch demo modal
-                </button>
+                </StyledButton> */}
 
-                <div
+                {/* <div
                   className="modal fade"
                   id="exampleModalCenter"
                   tabIndex="-1"
@@ -209,7 +291,7 @@ const UserProfilePage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </ProfileCol>
               <ProfileCol className="col order-history">
                 Order History

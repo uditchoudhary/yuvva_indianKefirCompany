@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { device } from "../../styles/devices";
 
-
 const Container = styled.div`
   width: 80vw;
   height: auto;
@@ -26,7 +25,7 @@ const Container = styled.div`
 const BodyContainer = ({ children }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
   return (
     <>
       <Container className="container-fluid">
