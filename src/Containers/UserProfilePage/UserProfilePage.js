@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
 const ProfileRow = styled.div`
   width: 80%;
@@ -24,6 +25,10 @@ const ProfileCol = styled.div`
   &.order-history {
     text-align: right;
   }
+`;
+
+const ErrorMessage = styled.span`
+  color: red;
 `;
 
 const StyledPara = styled.p`
@@ -56,6 +61,11 @@ const AddressFormUl = styled.ul`
         margin-left: 150px;
         margin-top: 10px;
       }
+      &.addressEditButton {
+        border: none;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
     }
   }
 `;
@@ -65,10 +75,18 @@ const UserProfilePage = () => {
   const [userProfileError, setUserProfileError] = useState();
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isUpdateDetailsFormloading, setIsUpdateDetailsFormloading] =
+    useState(false);
+
   const [isAddress, setIsAddress] = useState(false);
   const [enableAddressOption, setEnableAddressOption] = useState(false);
-
   const [addressInputs, setAddressInputs] = useState({});
+
+  const setDataAddressToState = ({ line1, line2, line3 }) => {
+    setAddressInputs((values) => ({ ...values, line1: line1 }));
+    setAddressInputs((values) => ({ ...values, line2: line2 }));
+    setAddressInputs((values) => ({ ...values, line2: line3 }));
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -80,7 +98,10 @@ const UserProfilePage = () => {
       .then((res) => {
         setUser(res.data);
         setIsLoading(false);
-        if (res.data.address) setIsAddress(true);
+        if (res.data.address) {
+          setIsAddress(true);
+          setDataAddressToState(res.data.address);
+        }
       })
       .catch((err) => {
         console.log("ERROR ", err.response.status);
@@ -94,6 +115,23 @@ const UserProfilePage = () => {
       });
   }, []);
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      line1: user.line1,
+      line2: user.line2,
+      line3: user.line3,
+    },
+    mode: "onChange",
+  });
+
   const handleAddressChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -104,6 +142,35 @@ const UserProfilePage = () => {
     e.preventDefault();
     console.log(`Body: ${body}`);
     AUTH_API.post(`/updateAddress`, body)
+      .then((res) => {
+        console.log(res);
+        setUser(res.data);
+        if (res.data.address) {
+          setIsAddress(true);
+          setDataAddressToState(res.data.address);
+          setAddressInputs({});
+        }
+        setEnableAddressOption(false);
+      })
+      .catch((err) => {
+        console.log("ERROR ", err.response.status);
+        if (err.response.status === 404) {
+          setUserProfileError("User not valid. Login please");
+        } else {
+          setUserProfileError("Oooops...!!! Something Went Wrong");
+        }
+        setEnableAddressOption(false);
+      });
+  };
+
+  const handleUserUpdate = (body) => {
+    console.log(`Body: ${body.name}`);
+    console.log(`Body: ${body.email}`);
+    console.log(`Body: ${body.phone}`);
+    console.log(`Body: ${body.line1}`);
+    console.log(`Body: ${body.line2}`);
+    console.log(`Body: ${body.line3}`);
+    AUTH_API.post(`/updateUserDetails`, body)
       .then((res) => {
         console.log(res);
         setUser(res.data);
@@ -120,6 +187,7 @@ const UserProfilePage = () => {
         setEnableAddressOption(false);
       });
   };
+
   if (isLoading) {
     return (
       <BodyContainer>
@@ -149,11 +217,6 @@ const UserProfilePage = () => {
                 <h5>Account Details:</h5>
                 <StyledPara className="userName">{user.name}</StyledPara>
                 <StyledPara>{user.email}</StyledPara>
-                {/* <input
-                  disabled={false}
-                  value={user.email}
-                  style={{ border: "none", width: "100%" }}
-                /> */}
                 <StyledPara>{user.phone}</StyledPara>
                 <StyledPara>{user.isAdmin && "Admin"}</StyledPara>
                 {isAddress ? (
@@ -165,7 +228,10 @@ const UserProfilePage = () => {
                       <li>
                         {user.address[0]}
                         <StyledButton
-                          onClick={() => setEnableAddressOption(true)}
+                          onClick={() => {
+                            setEnableAddressOption(true);
+                            setAddressInputs({});
+                          }}
                         >
                           Edit
                         </StyledButton>
@@ -208,7 +274,7 @@ const UserProfilePage = () => {
                           <input
                             type="button"
                             value="Submit"
-                            className="submitButton"
+                            className="addressEditButton"
                             onClick={(event) =>
                               handleAddress(event, {
                                 address: {
@@ -219,6 +285,12 @@ const UserProfilePage = () => {
                               })
                             }
                           />
+                          <input
+                            type="button"
+                            value="Cancel"
+                            className="addressEditButton"
+                            onClick={() => setEnableAddressOption(false)}
+                          />
                         </li>
                       </form>
                     </AddressFormUl>
@@ -228,7 +300,7 @@ const UserProfilePage = () => {
                 )}
 
                 <StyledButton
-                  className="btn btn-secondary"
+                  className="btn btn-secondary btn-sm"
                   onClick={(event) =>
                     handleAddress(event, {
                       address: {
@@ -239,23 +311,23 @@ const UserProfilePage = () => {
                     })
                   }
                 >
-                  Update Details
+                  auto
                 </StyledButton>
-                {/* <StyledButton
+                <StyledButton
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModalCenter"
+                  data-bs-target="#updateDetailsModal"
                 >
-                  Launch demo modal
-                </StyledButton> */}
+                  Update Details
+                </StyledButton>
 
-                {/* <div
+                <div
                   className="modal fade"
-                  id="exampleModalCenter"
+                  id="updateDetailsModal"
                   tabIndex="-1"
                   role="dialog"
-                  aria-labelledby="exampleModalCenterTitle"
+                  aria-labelledby="updateDetailsModalTitle"
                   aria-hidden="true"
                 >
                   <div
@@ -264,34 +336,145 @@ const UserProfilePage = () => {
                   >
                     <div className="modal-content">
                       <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLongTitle">
-                          Modal title
-                        </h5>
+                        <h4 className="page-title">Update Details</h4>
                         <button
                           type="button"
                           className="close"
-                          data-dismiss="modal"
+                          data-bs-dismiss="modal"
                           aria-label="Close"
                         >
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div className="modal-body">...</div>
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="button" className="btn btn-primary">
-                          Save changes
-                        </button>
+                      <div className="modal-body">
+                        <form onSubmit={handleSubmit(handleUserUpdate)}>
+                          <div className="row mb-3">
+                            <div className="col-md">
+                              <div className="form-floating">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="name"
+                                  placeholder="What's your full name?"
+                                  {...register("name", {
+                                    required: "Please enter your full name",
+                                    minLength: {
+                                      value: 4,
+                                      message:
+                                        "Please use 4 characters or more",
+                                    },
+                                    maxLength: {
+                                      value: 30,
+                                      message:
+                                        "Please use 30 characters or less",
+                                    },
+                                  })}
+                                />
+                                {errors.name && (
+                                  <ErrorMessage>
+                                    {errors.name.message}
+                                  </ErrorMessage>
+                                )}
+                                <label htmlFor="name">Full Name</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mb-3">
+                            <div className="col-md">
+                              <div className="form-floating">
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  id="email"
+                                  value={user.email}
+                                  disabled={true}
+                                  {...register("email", {
+                                    required: false,
+                                  })}
+                                />
+                                <label htmlFor="email">Email address</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mb-3">
+                            <div className="col-md">
+                              <div className="form-floating">
+                                <input
+                                  type="phone"
+                                  className="form-control"
+                                  id="phone"
+                                  {...register("phone", {
+                                    required: "Please enter mobile number",
+                                  })}
+                                />
+                                <label htmlFor="phone">Phone</label>
+                              </div>
+                            </div>
+                          </div>
+                          Addres:
+                          <div className="row mb-3">
+                            <div className="col-md">
+                              <div className="form-floating">
+                                <input
+                                  type="line1"
+                                  className="form-control"
+                                  id="line1"
+                                  {...register("line1", {
+                                    required: false,
+                                  })}
+                                />
+                                <label htmlFor="line1">address Line 1</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mb-3">
+                            <div className="col-md">
+                              <div className="form-floating">
+                                <input
+                                  type="line2"
+                                  className="form-control"
+                                  id="line2"
+                                  {...register("line2", {
+                                    required: "Please enter your full name",
+                                  })}
+                                />
+                                <label htmlFor="line2">address Line 2</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mb-3">
+                            <div className="col-md">
+                              <div className="form-floating">
+                                <input
+                                  type="line3"
+                                  className="form-control"
+                                  id="line3"
+                                  {...register("line3", {
+                                    required: "Please enter your full name",
+                                  })}
+                                />
+                                <label htmlFor="line3">address Line 3</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mb-3">
+                            <div className="col text-center">
+                              <div className="modal-footer">
+                                <button
+                                  type="submit"
+                                  className="btn btn-primary"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Save Details
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
-                </div> */}
+                </div>
               </ProfileCol>
               <ProfileCol className="col order-history">
                 Order History
