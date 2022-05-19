@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const CartPage = () => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
   const navigate = useNavigate();
 
   useEffect(() => {

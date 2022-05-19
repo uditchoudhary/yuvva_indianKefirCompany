@@ -51,7 +51,7 @@ const NavigationBar = () => {
     }
   };
 
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
   const onScroll = () => {
     if (
       document.body.scrollTop > 20 ||

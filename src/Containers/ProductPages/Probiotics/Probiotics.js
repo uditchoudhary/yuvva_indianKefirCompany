@@ -21,10 +21,10 @@ const Probiotics = () => {
           <div className="spinner">
             <div
               className="spinner-border"
-              style={{ width: "3rem", height: "3rem"}}
+              style={{ width: "3rem", height: "3rem" }}
               role="status"
             >
-              <span class="sr-only"></span>
+              <span className="sr-only"></span>
             </div>
           </div>
         ) : (

@@ -24,7 +24,7 @@ const RegisterPage = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [registerError, setRegisterError] = useState();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {

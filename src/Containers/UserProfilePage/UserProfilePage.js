@@ -71,7 +71,8 @@ const AddressFormUl = styled.ul`
 `;
 
 const UserProfilePage = () => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
+  const state = useSelector((state) => state);
   const [userProfileError, setUserProfileError] = useState();
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -104,7 +105,6 @@ const UserProfilePage = () => {
         }
       })
       .catch((err) => {
-        console.log("ERROR ", err.response.status);
         setIsLoading(false);
 
         if (err.response.status === 404) {
@@ -140,10 +140,8 @@ const UserProfilePage = () => {
 
   const handleAddress = (e, body) => {
     e.preventDefault();
-    console.log(`Body: ${body}`);
     AUTH_API.post(`/updateAddress`, body)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
         if (res.data.address) {
           setIsAddress(true);
@@ -153,7 +151,6 @@ const UserProfilePage = () => {
         setEnableAddressOption(false);
       })
       .catch((err) => {
-        console.log("ERROR ", err.response.status);
         if (err.response.status === 404) {
           setUserProfileError("User not valid. Login please");
         } else {
@@ -164,21 +161,14 @@ const UserProfilePage = () => {
   };
 
   const handleUserUpdate = (body) => {
-    console.log(`Body: ${body.name}`);
-    console.log(`Body: ${body.email}`);
-    console.log(`Body: ${body.phone}`);
-    console.log(`Body: ${body.line1}`);
-    console.log(`Body: ${body.line2}`);
-    console.log(`Body: ${body.line3}`);
+
     AUTH_API.post(`/updateUserDetails`, body)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
         setIsAddress(true);
         setEnableAddressOption(false);
       })
       .catch((err) => {
-        console.log("ERROR ", err.response.status);
         if (err.response.status === 404) {
           setUserProfileError("User not valid. Login please");
         } else {

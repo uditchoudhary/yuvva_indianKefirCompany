@@ -12,7 +12,7 @@ import * as serviceWorker from "./serviceWorker";
 const initalState = {};
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
-const store = createStore(rootReducer, composedEnhancer);
+const store = createStore(rootReducer, initalState, composedEnhancer);
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

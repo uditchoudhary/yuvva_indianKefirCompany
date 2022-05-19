@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import productReducers from "./productReducers";
-import GlobalReducer from "./GlobalReducer";
+import userReducers from "./userReducers.js";
 
 export default combineReducers({
-  productReducers,
-  GlobalReducer,
+  productState: productReducers,
+  userState: userReducers,
 });

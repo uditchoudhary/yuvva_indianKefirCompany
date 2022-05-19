@@ -13,7 +13,7 @@ const Button = styled.button`
 
 const DummyLogInOut = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
   const handleLogOutOnclick = () => {
     dispatch(LogInOut(false));
   };

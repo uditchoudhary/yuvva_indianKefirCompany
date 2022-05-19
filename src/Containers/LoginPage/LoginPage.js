@@ -16,7 +16,7 @@ const LoginPage = () => {
   const [loginError, setLoginError] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {
