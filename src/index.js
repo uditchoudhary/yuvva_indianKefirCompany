@@ -1,14 +1,18 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, applyMiddleware } from "redux";
 import { CookiesProvider } from "react-cookie";
-import rootReducer from "./Store/Reducers/GlobalReducer";
+import rootReducer from "./Store/Reducers";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
+const initalState = {};
 
-const store = createStore(rootReducer);
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
+const store = createStore(rootReducer, composedEnhancer);
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
