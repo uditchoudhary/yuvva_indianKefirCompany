@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
 import { useNavigate } from "react-router-dom";
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
+import { loginUser } from "../../Store/Actions/userActions";
 
 const ErrorMessage = styled.span`
   color: red;
@@ -17,6 +18,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const state = useSelector((state) => state);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -55,6 +57,18 @@ const LoginPage = () => {
       });
     setIsLoading(false);
   };
+
+  // const onLoginSubmit = (body) => {
+  //   setIsLoading(true);
+  //   dispatch(loginUser(body));
+  //   if (state.loginError) {
+  //     setLoginError("Error");
+  //   } else {
+  //     navigate("/profile");
+  //   }
+  //   setIsLoading(false);
+  //   reset();
+  // };
 
   const handleRegisterClick = () => {
     navigate("/register");

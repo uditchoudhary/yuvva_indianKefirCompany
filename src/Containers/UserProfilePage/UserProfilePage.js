@@ -91,6 +91,7 @@ const UserProfilePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     setIsLoading(true);
+    console.log(" -> ", isLoggedIn);
     if (!isLoggedIn) {
       navigate("/login");
     }

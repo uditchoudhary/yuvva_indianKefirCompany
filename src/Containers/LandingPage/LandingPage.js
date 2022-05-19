@@ -8,7 +8,7 @@ const LandingPage = () => {
   const categories = useSelector((state) => state.categories);
   console.log(categories);
   useEffect(() => {
-    dispatch(getProductCategories);
+    dispatch(getProductCategories());
   }, [dispatch]);
   return (
     <>
