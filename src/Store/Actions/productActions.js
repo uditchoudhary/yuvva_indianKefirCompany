@@ -1,7 +1,7 @@
 import * as actiontypes from "./ActionTypes";
 import { instance as API } from "../../services/axiosConfig";
 
-export const getProductCategories = () => {
+export const getCategories = () => {
   return async (dispatch) => {
     try {
       const res = await API.get(`${process.env.REACT_APP_API}/categories`);
