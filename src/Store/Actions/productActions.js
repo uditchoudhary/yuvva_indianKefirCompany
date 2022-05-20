@@ -4,7 +4,7 @@ import { instance as API } from "../../services/axiosConfig";
 export const getCategories = () => {
   return async (dispatch) => {
     try {
-      const res = await API.get(`${process.env.REACT_APP_API}/categories`);
+      const res = await API.get(`/categories`);
       dispatch({
         type: actiontypes.SET_CATEGORIES,
         payload: res.data,

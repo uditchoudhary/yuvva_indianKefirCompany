@@ -5,7 +5,7 @@ const authInstance = axios.create({
 });
 authInstance.defaults.withCredentials = true;
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_AUTH,
+  baseURL: process.env.REACT_APP_API,
 });
 
 export { authInstance, instance };
