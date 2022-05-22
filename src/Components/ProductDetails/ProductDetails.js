@@ -8,18 +8,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { device } from "../../styles/devices";
 
 const LeftContainer = styled.div`
-  // border: 1px solid black;
-  // height: 50vh;
   padding: 40px;
 `;
 const RightContainer = styled.div`
-  // border: 1px solid black;
   height: 50vh;
   padding: 40px;
 `;
 
 const ProductDetailsPageWrapper = styled.div`
-  // border: 1px solid black;
   @media ${device.tablet} {
     display: flex;
     flex-direction: column;
@@ -34,12 +30,35 @@ const CarouselImage = styled.img`
   }
 `;
 
+const CardButton = styled.button`
+  border: none;
+  transition: 0.4s ease-in;
+  z-index: 1;
+  width: 100%;
+  height: 30px;
+  margin-top: 50px;
+  &:before {
+    position: absolute;
+    content: "";
+    z-index: -1;
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    z-index: -1;
+  }
+  &:hover {
+    box-shadow: inset -20em 0 0 0 #fcc7b7, inset 20.5em 0 0 0 #fcc7b7;
+  }
+`;
+
 const ProductDetails = () => {
   const params = useParams();
   const [isLoading, setIsloading] = useState(true);
   const [productDetails, setProductDetails] = useState({});
   const [fetchError, setFetchError] = useState("");
   const productId = params.id;
+  const [quantity, setQuanity] = useState(1);
 
   const {
     item_name,
@@ -47,6 +66,7 @@ const ProductDetails = () => {
     productCategory_name,
     category_name,
     item_description,
+    item_size_price_ml,
   } = productDetails;
 
   useEffect(() => {
@@ -106,14 +126,83 @@ const ProductDetails = () => {
           </LeftContainer>
           <RightContainer className="col">
             <div className="row">
-              <div className="col"> {category_name} </div>
-              <div className="col"> {productCategory_name} </div>
-              <div className="col">{item_name}</div>
+              <div
+                className="col"
+                style={{
+                  fontSize: "32px",
+                  lineHeight: "46px",
+                  textAlign: "start",
+                  color: "#4a4a4a",
+                }}
+              >
+                <p>
+                  {productCategory_name}{" "}
+                  <span
+                    style={{
+                      color: item_name === "Orange" ? "orange" : "#e3374b",
+                      fontSize: "30px",
+                    }}
+                  >
+                    {item_name}
+                  </span>
+                </p>
+              </div>
             </div>
             <div className="row">
-              <div className="col">Add cart</div>
-              <div className="col">Description</div>
+              <div
+                className="col"
+                style={{
+                  fontSize: "20px",
+                  lineHeight: "46px",
+                  textAlign: "start",
+                  color: "#4a4a4a",
+                }}
+              >
+                {category_name}{" "}
+              </div>
             </div>
+            <div className="row">
+              <div
+                className="col"
+                style={{
+                  marginTop: "20px",
+                }}
+              >
+                {item_description}
+              </div>
+            </div>
+            <div className="row">
+              <div
+                className="col"
+                style={{
+                  marginTop: "20px",
+                }}
+              >
+                Price: &#x20B9; {item_size_price_ml[0].price} for{" "}
+                {item_size_price_ml[0].size} ml bottle
+              </div>
+              <div className="row">
+                <div
+                  className="col"
+                  style={{
+                    marginTop: "20px",
+                  }}
+                >
+                  Quantity:{" "}
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuanity(e.target.value)}
+                    min={1}
+                    style={{
+                      marginLeft: "20px",
+                      width: "50px",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+            <CardButton>Add to Cart</CardButton>
           </RightContainer>
         </ProductDetailsPageWrapper>
       )}
