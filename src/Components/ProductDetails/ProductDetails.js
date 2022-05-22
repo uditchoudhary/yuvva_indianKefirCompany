@@ -5,6 +5,7 @@ import BodyContainer from "../../Containers/BodyContainer";
 import { instance as API } from "../../services/axiosConfig";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { device } from "../../styles/devices";
 
 const LeftContainer = styled.div`
   // border: 1px solid black;
@@ -12,14 +13,25 @@ const LeftContainer = styled.div`
   padding: 40px;
 `;
 const RightContainer = styled.div`
-  border: 1px solid black;
+  // border: 1px solid black;
   height: 50vh;
   padding: 40px;
 `;
 
+const ProductDetailsPageWrapper = styled.div`
+  // border: 1px solid black;
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 const CarouselImage = styled.img`
-  max-width: 20%;
+  max-width: 30%;
   height: auto;
+  @media ${device.tablet} {
+    max-width: 20%;
+  }
 `;
 
 const ProductDetails = () => {
@@ -69,7 +81,7 @@ const ProductDetails = () => {
       {fetchError ? (
         <h5>Something went wrong...</h5>
       ) : (
-        <div className="row">
+        <ProductDetailsPageWrapper className="row">
           {console.log(productDetails)}
           <LeftContainer className="col">
             <Carousel
@@ -80,9 +92,13 @@ const ProductDetails = () => {
               showStatus={false}
               showIndicators={false}
             >
-                {item_images.map((item) => {
-                  return (<div><CarouselImage src={item_images[0].image_url} /></div>);
-                } )}
+              {item_images.map((item) => {
+                return (
+                  <div>
+                    <CarouselImage src={item_images[0].image_url} />
+                  </div>
+                );
+              })}
               {/* <div>
                 <CarouselImage src={item_images[0].image_url} />
               </div> */}
@@ -99,7 +115,7 @@ const ProductDetails = () => {
               <div className="col">Description</div>
             </div>
           </RightContainer>
-        </div>
+        </ProductDetailsPageWrapper>
       )}
     </BodyContainer>
   );
