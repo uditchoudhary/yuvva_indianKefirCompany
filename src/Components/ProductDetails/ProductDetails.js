@@ -23,7 +23,7 @@ const ProductDetailsPageWrapper = styled.div`
 `;
 
 const CarouselImage = styled.img`
-  max-width: 30%;
+  max-width: 150px;
   height: auto;
   @media ${device.tablet} {
     max-width: 20%;
@@ -34,9 +34,12 @@ const CardButton = styled.button`
   border: none;
   transition: 0.4s ease-in;
   z-index: 1;
-  width: 100%;
+  width: 80%;
   height: 30px;
-  margin-top: 50px;
+  margin-top: 100px;
+  @media ${device.tablet} {
+    margin-top: 50px;
+  }
   &:before {
     position: absolute;
     content: "";
@@ -48,7 +51,7 @@ const CardButton = styled.button`
     z-index: -1;
   }
   &:hover {
-    box-shadow: inset -20em 0 0 0 #fcc7b7, inset 20.5em 0 0 0 #fcc7b7;
+    box-shadow: inset -25em 0 0 0 #fcc7b7, inset 25.5em 0 0 0 #fcc7b7;
   }
 `;
 
