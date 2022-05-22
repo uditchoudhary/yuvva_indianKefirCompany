@@ -1,4 +1,10 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+const CardLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
 
 const CardPrice = styled.div`
   margin-top: 7px;
@@ -54,69 +60,49 @@ const StyledImage = styled.img`
 
 const SizeDropdown = styled.select`
   width: 80px;
-  margin-left: 10px;
+  margin-left: 5px;
   width: max-content;
 `;
 
 const SizeMlSpan = styled.span`
   margin-left: 2px;
+  margin-right: 2px;
 `;
 
 const ProductCard = ({ product }) => {
-  const { item_images, item_size_price_ml, item_name, category_name } = product;
-
+  const { item_images, item_size_price_ml, item_name, category_name, item_id } =
+    product;
   return (
-    <>
-      <CardWrapper>
-        <div className="card-image d-flex justify-content-center">
-          <StyledImage
-            src={item_images[0][Object.keys(item_images[0])[0]]}
-            alt={item_images[0][Object.keys(item_images[0])[1]]}
-          />
-        </div>
-        <CardCategory className="d-flex justify-content-center my-2">
-          {category_name}
-        </CardCategory>
-        <div className="card-name  d-flex justify-content-center ">
-          {item_name}
-        </div>
-        {/* <div className="card-price  d-flex justify-content-center ">
-          Starts from {product.price}
-        </div> */}
-
-        <div className="d-flex justify-content-center">
-          {item_size_price_ml.length === 1 ? (
-            <>
-              <div>
-                Size: {item_size_price_ml[0].size}
-                <SizeMlSpan>ml</SizeMlSpan>
-              </div>
-            </>
-          ) : (
-            <>
-              <SizeDropdown name="size" id="size" className="size-dropdown">
-                
-                {item_size_price_ml.map((i, key) => {
-                  return (
-                    <>
-                      <option key={key} value={i.size}>
-                        {i.size}
-                      </option>
-                    </>
-                  );
-                })}
-              </SizeDropdown>
-              <SizeMlSpan>ml</SizeMlSpan>
-            </>
-          )}
-        </div>
-        <CardPrice>Rs. {item_size_price_ml[0].price}</CardPrice>
+    <CardWrapper>
+      <>
+        <CardLink to={`/product/${item_id}/details`}>
+          <div className="card-image d-flex justify-content-center">
+            <StyledImage
+              src={item_images[0][Object.keys(item_images[0])[0]]}
+              alt={item_images[0][Object.keys(item_images[0])[1]]}
+            />
+          </div>
+          <CardCategory className="d-flex justify-content-center my-2">
+            {category_name}
+          </CardCategory>
+          <div className="card-name  d-flex justify-content-center ">
+            {item_name}
+          </div>
+          <div className="d-flex justify-content-center">
+            <SizeMlSpan> Size: </SizeMlSpan>
+            <div style={{ marginLeft: "5px" }}>
+              {item_size_price_ml[0].size}
+            </div>
+            <SizeMlSpan>ml</SizeMlSpan>
+          </div>
+          <CardPrice>Rs. {item_size_price_ml[0].price}</CardPrice>
+        </CardLink>
 
         <div className="card-cart d-flex justify-content-center mt-3 ">
           <CardButton>Add to Cart</CardButton>
         </div>
-      </CardWrapper>
-    </>
+      </>
+    </CardWrapper>
   );
 };
 
