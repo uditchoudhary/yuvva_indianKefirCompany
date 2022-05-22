@@ -72,16 +72,20 @@ const ProductDetails = () => {
         <div className="row">
           {console.log(productDetails)}
           <LeftContainer className="col">
-            <Carousel autoPlay infiniteLoop>
-              <div>
+            <Carousel
+              autoPlay
+              infiniteLoop
+              showThumbs={false}
+              interval={5000}
+              showStatus={false}
+              showIndicators={false}
+            >
+                {item_images.map((item) => {
+                  return (<div><CarouselImage src={item_images[0].image_url} /></div>);
+                } )}
+              {/* <div>
                 <CarouselImage src={item_images[0].image_url} />
-              </div>
-              <div>
-                <CarouselImage src={item_images[0].image_url} />
-              </div>
-              <div>
-                <CarouselImage src={item_images[0].image_url} />
-              </div>
+              </div> */}
             </Carousel>
           </LeftContainer>
           <RightContainer className="col">
