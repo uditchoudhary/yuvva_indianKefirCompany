@@ -11,7 +11,7 @@ const LeftContainer = styled.div`
   padding: 40px;
 `;
 const RightContainer = styled.div`
-  height: 50vh;
+  // height: 50vh;
   padding: 40px;
 `;
 
@@ -205,7 +205,11 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-            <CardButton>Add to Cart</CardButton>
+            <div className="row">
+              <div className="col">
+                <CardButton>Add to Cart</CardButton>
+              </div>
+            </div>
           </RightContainer>
         </ProductDetailsPageWrapper>
       )}

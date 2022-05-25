@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import AddToCartService from "../../services/addToCartService";
+import { useState } from "react";
 
 const CardLink = styled(Link)`
   text-decoration: none;
@@ -70,8 +72,15 @@ const SizeMlSpan = styled.span`
 `;
 
 const ProductCard = ({ product }) => {
-  const { item_images, item_size_price_ml, item_name, category_name, item_id } =
-    product;
+  const {
+    item_images,
+    item_size_price_ml,
+    item_name,
+    category_name,
+    item_id,
+    _id,
+    productCategory_name,
+  } = product;
   return (
     <CardWrapper>
       <>
@@ -99,7 +108,20 @@ const ProductCard = ({ product }) => {
         </CardLink>
 
         <div className="card-cart d-flex justify-content-center mt-3 ">
-          <CardButton>Add to Cart</CardButton>
+          {/* <CardButton>Add to Cart</CardButton> */}
+          <AddToCartService
+            item={{
+              item_id,
+              category_name,
+              item_name,
+              productCategory_name,
+              size: item_size_price_ml[0].size,
+              price: item_size_price_ml[0].price,
+              quantity: 1,
+              _id,
+              image: item_images[0].image_url
+            }}
+          />
         </div>
       </>
     </CardWrapper>
