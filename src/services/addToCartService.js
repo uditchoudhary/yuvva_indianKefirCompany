@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 import styled from "styled-components";
+// import { setCartData } from "../Store/Actions/CartActions";
 import { device } from "../styles/devices";
 
 import { authInstance as AUTH_API } from "./axiosConfig";
@@ -30,10 +30,9 @@ const CardButton = styled.button`
   }
 `;
 
-const handleAddToCartOnClick = ( item ) => {
+const HandleAddToCartOnClick = (item) => {
   console.log("item  -> ", item);
-
-  AUTH_API.post(`/cartadditem`, {item})
+  AUTH_API.post(`/cartadditem`, { item })
     .then((res) => {
       console.log(res);
     })
@@ -42,9 +41,9 @@ const handleAddToCartOnClick = ( item ) => {
     });
 };
 
-const AddToCartService = ({item}) => {
+const AddToCartService = ({ item }) => {
   return (
-    <CardButton onClick={() => handleAddToCartOnClick(item)}>
+    <CardButton onClick={() => HandleAddToCartOnClick(item)}>
       Add to Cart
     </CardButton>
   );

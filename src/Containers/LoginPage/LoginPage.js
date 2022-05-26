@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
 import { useNavigate } from "react-router-dom";
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
+import { getCartData } from "../../Store/Actions/CartActions";
 
 const ErrorMessage = styled.span`
   color: red;
@@ -42,6 +43,7 @@ const LoginPage = () => {
     AUTH_API.post(`/login`, body)
       .then((res) => {
         dispatch(LogInOut(true));
+        dispatch(getCartData());
         navigate("/profile");
         reset();
       })

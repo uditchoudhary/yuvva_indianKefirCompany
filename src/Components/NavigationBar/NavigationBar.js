@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import logo from "../../static/images/yuvva_logo_small.jpg";
 import { device } from "../../styles/devices";
@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LogInOut from "../../Store/Actions/Actions";
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
 import { useNavigate } from "react-router-dom";
-
+import { getCartData } from "../../Store/Actions/CartActions";
 
 const NavbarWrapper = styled.div`
   width: 80vw;
@@ -38,7 +38,9 @@ const StyledLink = styled(Link)`
 const NavigationBar = () => {
   const navBarRef = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const cartData = useSelector((state) => state.cartState.cartData);
+  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
+
   const handleLogInOutButtonClick = (e) => {
     const action = e.target.innerText;
     if (action === "Log out") {
@@ -51,7 +53,6 @@ const NavigationBar = () => {
     }
   };
 
-  const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
   const onScroll = () => {
     if (
       document.body.scrollTop > 20 ||
@@ -70,6 +71,10 @@ const NavigationBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) dispatch(getCartData());
+  }, []);
+
   return (
     <>
       <NavbarWrapper
@@ -79,9 +84,9 @@ const NavigationBar = () => {
       >
         <div className="justify-content-center">
           <nav className="navbar navbar-expand-lg d-flex">
-            <a className="navbar-brand me-auto" href="/">
+            <Link className="navbar-brand me-auto" to="/">
               <NavBarLogo src={logo} alt="Logo" className="yuuva-logo" />
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -225,7 +230,12 @@ const NavigationBar = () => {
                 {isLoggedIn && (
                   <li className="nav-item">
                     <StyledLink className="nav-link nav-item ms-3" to="/cart">
-                      Cart (0)
+                      Cart (
+                      {cartData?.itemList.reduce(
+                        (previous, object) => previous + object.quantity,
+                        0
+                      ) || "0"}
+                      )
                     </StyledLink>
                   </li>
                 )}

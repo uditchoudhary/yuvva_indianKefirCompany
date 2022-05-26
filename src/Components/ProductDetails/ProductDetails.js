@@ -6,7 +6,8 @@ import { instance as API } from "../../services/axiosConfig";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { device } from "../../styles/devices";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Store/Actions/CartActions";
 const LeftContainer = styled.div`
   padding: 40px;
 `;
@@ -62,7 +63,7 @@ const ProductDetails = () => {
   const [fetchError, setFetchError] = useState("");
   const productId = params.id;
   const [quantity, setQuanity] = useState(1);
-
+  const dispatch = useDispatch();
   const {
     item_name,
     item_images,
@@ -70,7 +71,13 @@ const ProductDetails = () => {
     category_name,
     item_description,
     item_size_price_ml,
+    item_id,
+    _id,
   } = productDetails;
+
+  const handleOnClick = (item) => {
+    dispatch(addToCart(item));
+  };
 
   useEffect(() => {
     setIsloading(true);
@@ -105,7 +112,6 @@ const ProductDetails = () => {
         <h5>Something went wrong...</h5>
       ) : (
         <ProductDetailsPageWrapper className="row">
-          {console.log(productDetails)}
           <LeftContainer className="col">
             <Carousel
               autoPlay
@@ -191,7 +197,7 @@ const ProductDetails = () => {
                     marginTop: "20px",
                   }}
                 >
-                  Quantity:{" "}
+                  Quantity:
                   <input
                     type="number"
                     value={quantity}
@@ -207,7 +213,25 @@ const ProductDetails = () => {
             </div>
             <div className="row">
               <div className="col">
-                <CardButton>Add to Cart</CardButton>
+                <CardButton
+                  onClick={() =>
+                    handleOnClick({
+                      item: {
+                        item_id,
+                        category_name,
+                        item_name,
+                        productCategory_name,
+                        size: item_size_price_ml[0].size,
+                        price: item_size_price_ml[0].price,
+                        quantity: quantity,
+                        _id,
+                        image: item_images[0].image_url,
+                      },
+                    })
+                  }
+                >
+                  Add to Cart
+                </CardButton>
               </div>
             </div>
           </RightContainer>

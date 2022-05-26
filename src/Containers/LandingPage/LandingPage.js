@@ -8,12 +8,13 @@ import { getCategories } from "../../Store/Actions/productActions";
 const KombuchaGreet = styled.div`
   box-sizing: border-box;
   width: 100%;
-  border: 5px solid rgb(32, 56, 58);
-  background-color: #65746c;
+  // border: 0.1px solid rgb(32, 56, 58);
+  // background-color: #65746c;
   height: 20vh;
   position: relative;
   font-family: Gilroy;
-  color: #98ffc5;
+  // color: #98ffc5;
+  margin-top: -60px;
 `;
 
 const LandingPage = () => {

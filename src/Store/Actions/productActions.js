@@ -12,7 +12,7 @@ export const getCategories = () => {
     } catch (e) {
       dispatch({
         type: actiontypes.CATEGORIES_ERROR,
-        payload: console.log("Error", e),
+        payload: e,
       });
     }
   };
