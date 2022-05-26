@@ -37,20 +37,29 @@ const CartPage = () => {
   return (
     <>
       <BodyContainer>
-        <h3 className="page-title"> Cart </h3>
-        <div>
-          {cartData?.itemList &&
-            cartData.itemList.map((cartItem) => {
-              const { item_name, quantity, id, size, price } = cartItem;
-              return (
-                <>
-                  <p>
-                    {item_name}:{quantity}:{id}:{size}:{price}
-                  </p>
-                  <CartProductCard cartItem={cartItem} />
-                </>
-              );
-            })}
+        <h3 className="page-title"> SHOPPING CART </h3>
+        <div className="row">
+          {cartData?.itemList ? (
+            <>
+              <div className="col">
+                {cartData.itemList.map((cartItem) => {
+                  const { item_name, quantity, id, size, price } = cartItem;
+                  return (
+                    <>
+                      <p>
+                        {item_name}:{quantity}:{id}:{size}:{price}
+                      </p>
+                      <CartProductCard cartItem={cartItem} />
+                    </>
+                  );
+                })}
+              </div>
+              <div className="col">checkout</div>
+            </>
+          ) :
+          (
+            <h4>Empty cart - shop</h4>
+          )}
         </div>
       </BodyContainer>
     </>

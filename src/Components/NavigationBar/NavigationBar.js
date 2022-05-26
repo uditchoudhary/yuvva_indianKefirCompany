@@ -231,7 +231,7 @@ const NavigationBar = () => {
                   <li className="nav-item">
                     <StyledLink className="nav-link nav-item ms-3" to="/cart">
                       Cart (
-                      {cartData?.itemList.reduce(
+                      {cartData?.itemList?.reduce(
                         (previous, object) => previous + object.quantity,
                         0
                       ) || "0"}
