@@ -34,7 +34,7 @@ const ProductWrapper = styled.div`
 `;
 const TotalItemsAndCostWrapper = styled.div`
   border: 1px solid #b60c20;
-  height: 50px;
+  max-height: 50px;
   padding: 10px;
   display: flex;
   flex: 1;
