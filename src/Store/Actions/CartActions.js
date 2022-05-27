@@ -1,6 +1,27 @@
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
 import * as actionTypes from "./ActionTypes";
 
+const setCartData = (res) => {
+  const totalItems = res.data?.itemList?.reduce(
+    (previous, object) => previous + object.quantity,
+    0
+  );
+  return (dispatch) => {
+    dispatch({
+      type: actionTypes.SET_CART_DATA,
+      payload: res.data,
+    });
+    dispatch({
+      type: actionTypes.SET_CART_TOTAL_COST,
+      payload: res.data.total,
+    });
+    dispatch({
+      type: actionTypes.SET_CART_TOTAL_ITEMS,
+      payload: totalItems,
+    });
+  };
+};
+
 export const getCartData = () => {
   return async (dispatch) => {
     dispatch({
@@ -9,10 +30,7 @@ export const getCartData = () => {
     });
     await AUTH_API.get(`/cart`)
       .then((res) => {
-        dispatch({
-          type: actionTypes.SET_CART_DATA,
-          payload: res.data,
-        });
+        dispatch(setCartData(res));
       })
       .catch((err) => {
         dispatch({
@@ -31,35 +49,19 @@ export const addToCart = (item) => {
   return async (dispatch) => {
     await AUTH_API.post(`/cartadditem`, item)
       .then((res) => {
-        dispatch({
-          type: actionTypes.SET_CART_DATA,
-          payload: res.data,
-        });
-        alert("Added to add cart");
-
-        // dispatch({
-        //   type: actionTypes.ITEM_ADD_CART_SUCCESS,
-        //   payload: true,
-        // });
+        dispatch(setCartData(res));
       })
       .catch((err) => {
         alert("failed to add to the cart");
-        // dispatch({
-        //   type: actionTypes.ITEM_ADD_CART_FAILED,
-        //   payload: err,
-        // });
       });
   };
 };
 
-export const removeItemFromCart = (cartObjectId) => {
+export const removeItemFromCart = (body) => {
   return async (dispatch) => {
-    await AUTH_API.post(`cartremoveitem`, cartObjectId)
+    await AUTH_API.post(`cartremoveitem`, body)
       .then((res) => {
-        dispatch({
-          type: actionTypes.SET_CART_DATA,
-          payload: res.data,
-        });
+        dispatch(setCartData(res));
       })
       .catch((err) => alert("failed to add to the cart"));
   };
@@ -67,13 +69,10 @@ export const removeItemFromCart = (cartObjectId) => {
 
 export const deleteCart = () => {
   return async (dispatch) => {
-    await AUTH_API.post('/deleteCart')
-    .then(res => {
-        dispatch({
-          type: actionTypes.SET_CART_DATA,
-          payload: res.data,
-        });
-    })
-    .catch(err => alert("Card delete failed"))
-  }
-}
+    await AUTH_API.post("/deleteCart")
+      .then((res) => {
+        dispatch(setCartData(res));
+      })
+      .catch((err) => alert("Card delete failed"));
+  };
+};

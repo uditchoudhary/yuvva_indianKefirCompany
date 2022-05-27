@@ -72,12 +72,10 @@ const AddressFormUl = styled.ul`
 
 const UserProfilePage = () => {
   const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
-  const state = useSelector((state) => state);
   const [userProfileError, setUserProfileError] = useState();
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [isUpdateDetailsFormloading, setIsUpdateDetailsFormloading] =
-    useState(false);
+  
 
   const [isAddress, setIsAddress] = useState(false);
   const [enableAddressOption, setEnableAddressOption] = useState(false);

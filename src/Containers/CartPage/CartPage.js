@@ -24,7 +24,7 @@ const ParentContainer = styled.div`
   }
 `;
 const LeftContainer = styled.div`
-  flex: 2;
+  flex: 1;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@ const RightContainer = styled.div`
   padding: 20px;
   transition: ease-in-out;
 `;
-
+const ContinueShopping = styled.button``;
 const EmptyCartDisplay = styled.div`
   // border: 0.1px solid black;
   min-height: 30vh;
@@ -93,6 +93,8 @@ const EmptyCartText = styled.div``;
 const CartPage = () => {
   const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
   const cartData = useSelector((state) => state.cartState.cartData);
+  const cartTotalItems = useSelector((state) => state.cartState.cartTotalItems);
+  const cartTotalCost = useSelector((state) => state.cartState.cartTotalCost);
   const cartFetchLoading = useSelector(
     (state) => state.cartState.cartFetchLoading
   );
@@ -105,8 +107,8 @@ const CartPage = () => {
     dispatch(getCartData());
   }, [isLoggedIn, navigate]);
 
-  const handleRemoveItemFromCart = (_id) => {
-    dispatch(removeItemFromCart(_id));
+  const handleRemoveItemFromCart = (body) => {
+    dispatch(removeItemFromCart(body));
   };
   const handleDeleteCart = () => {
     dispatch(deleteCart());
@@ -135,7 +137,7 @@ const CartPage = () => {
       <BodyContainer>
         <h3 className="page-title"> SHOPPING CART </h3>
         <div className="row">
-          {cartData?.itemList ? (
+          {cartData?.itemList?.length > 0 ? (
             <ParentContainer>
               <LeftContainer>
                 <ProductWrapper>
@@ -145,15 +147,20 @@ const CartPage = () => {
                         key={cartItem._id}
                         cartItem={cartItem}
                         onRemoveItemFromCart={() =>
-                          handleRemoveItemFromCart({ _id: cartItem._id })
+                          handleRemoveItemFromCart({
+                            _id: cartItem._id,
+                            price: cartItem.price,
+                            quantity: cartItem.quantity,
+                          })
                         }
                       />
                     );
                   })}
                 </ProductWrapper>
                 <TotalItemsAndCostWrapper>
-                  <TotalText>Total</TotalText> <TotalItems>items</TotalItems>
-                  <TotalCost>price</TotalCost>
+                  <TotalText>Total</TotalText>
+                  <TotalItems>Quantity: {cartTotalItems}</TotalItems>
+                  <TotalCost>&#x20B9; {cartTotalCost}</TotalCost>
                 </TotalItemsAndCostWrapper>
                 <WrapperBottom>
                   <EmptyCart className="btn btn-danger btn-sm">
@@ -175,6 +182,12 @@ const CartPage = () => {
                       Clear Cart
                     </DeleteCartIconText>
                   </EmptyCart>
+                  <ContinueShopping
+                    className="btn btn-secondary"
+                    onClick={() => navigate("/products/all")}
+                  >
+                    Continue Shopping
+                  </ContinueShopping>
                   <PrimaryCheckout
                     className="btn btn-success btn-sm"
                     type="button"

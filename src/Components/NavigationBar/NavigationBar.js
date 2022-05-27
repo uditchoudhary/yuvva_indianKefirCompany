@@ -38,7 +38,7 @@ const StyledLink = styled(Link)`
 const NavigationBar = () => {
   const navBarRef = useRef(null);
   const dispatch = useDispatch();
-  const cartData = useSelector((state) => state.cartState.cartData);
+  const cartTotalItems = useSelector((state) => state.cartState.cartTotalItems);
   const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
 
   const handleLogInOutButtonClick = (e) => {
@@ -231,11 +231,7 @@ const NavigationBar = () => {
                   <li className="nav-item">
                     <StyledLink className="nav-link nav-item ms-3" to="/cart">
                       Cart (
-                      {cartData?.itemList?.reduce(
-                        (previous, object) => previous + object.quantity,
-                        0
-                      ) || "0"}
-                      )
+                      {cartTotalItems || 0 })
                     </StyledLink>
                   </li>
                 )}

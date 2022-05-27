@@ -65,9 +65,9 @@ const CartProductCard = ({ cartItem, onRemoveItemFromCart }) => {
       </ProductDetails>
       <ProductQandPrice>
         <ProductQuantity>
-          <QuantityInput type="Number" value={quantity} readOnly={true} />
+          Quantity: <QuantityInput type="Number" value={quantity} readOnly={true} />
         </ProductQuantity>
-        <ProductTotalCost>{totalCost}</ProductTotalCost>
+        <ProductTotalCost>&#x20B9; {totalCost}</ProductTotalCost>
       </ProductQandPrice>
       <RemoveItem onClick={() => onRemoveItemFromCart()}>
         <svg

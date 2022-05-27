@@ -5,7 +5,9 @@ const INITIAL_STATE = {
   cartFetchLoading: false,
   cartFetchFailure: undefined,
   addToCartFailure: false,
-  addToCartSuccess: false
+  addToCartSuccess: false,
+  cartTotalItems: undefined,
+  cartTotalCost: undefined,
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +18,10 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return { ...state, cartFetchLoading: action.payload };
     case actions.CART_FETCH_FAILURE:
       return { ...state, cartFetchFailure: action.payload };
+    case actions.SET_CART_TOTAL_COST:
+      return { ...state, cartTotalCost: action.payload };
+    case actions.SET_CART_TOTAL_ITEMS:
+      return { ...state, cartTotalItems: action.payload };
     // case actions.ITEM_ADD_CART_FAILED:
     //   return { ...state, addToCartFailure: action.payload };
     // case actions.ITEM_ADD_CART_SUCCESS:

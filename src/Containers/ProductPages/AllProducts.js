@@ -19,6 +19,23 @@ const AllProducts = () => {
         setIsloading(false);
       });
   }, []);
+    if (isLoading) {
+      return (
+        <BodyContainer>
+          <h3 className="page-title"> Profile page </h3>
+
+          <div className="spinner">
+            <div
+              className="spinner-border"
+              style={{ width: "3rem", height: "3rem" }}
+              role="status"
+            >
+              <span className="sr-only"></span>
+            </div>
+          </div>
+        </BodyContainer>
+      );
+    }
   return (
     <>
       <BodyContainer>

@@ -126,7 +126,7 @@ const ProductCard = ({ product }) => {
             </div>
             <SizeMlSpan>ml</SizeMlSpan>
           </div>
-          <CardPrice>Rs. {item_size_price_ml[0].price}</CardPrice>
+          <CardPrice>&#x20B9; {item_size_price_ml[0].price}</CardPrice>
         </CardLink>
         <div className="card-cart d-flex justify-content-center mt-3 ">
           <CardButton
