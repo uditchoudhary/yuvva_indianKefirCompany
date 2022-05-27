@@ -14,7 +14,7 @@ import CheckoutComponent from "../../Components/CheckoutComponent";
 
 const ParentContainer = styled.div`
   display: flex;
-  padding: 20px;
+  padding-top: 20px;
   @media ${device.laptop} {
     padding: 20px 0px;
   }
@@ -24,7 +24,7 @@ const ParentContainer = styled.div`
   }
 `;
 const LeftContainer = styled.div`
-  flex: 1;
+  flex: 2;
   padding: 20px;
   display: flex;
   flex-direction: column;

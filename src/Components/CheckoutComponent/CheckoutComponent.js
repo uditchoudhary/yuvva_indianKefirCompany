@@ -1,39 +1,47 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 20px;
-  justify-content: space-around;
+  justify-content: center;
   height: 100%;
 `;
 
 const UserDetails = styled.div`
   text-align: left;
+  margin-bottom: 20px;
 `;
 const UserName = styled.div`
   font-size: 24px;
 `;
 const UserAddress = styled.div`
   font-size: 18px;
-  margin-top: 20px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
-const TotalItems = styled.div``;
+const TotalItems = styled.div`
+  border: 1px solid black;
+  width: 100px;
+  padding: 2px;
+  text-align: center;
+`;
 
 const TotalItemsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding-right: 40px;
+  justify-content: space-around;
+  //   padding-right: 40px;
   padding-bottom: 15px;
-  border-bottom: 0.1px solid black;
+  //   border-bottom: 0.1px solid black;
 `;
 
 const TotalAmountWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-bottom: 15px;
   border-bottom: 0.1px solid black;
 `;
@@ -49,18 +57,41 @@ const PayTmWrapper = styled.button`
     margin-right: 10px;
   }
 `;
+
+const ChangeAddress = styled.button`
+  margin-left: 100px;
+  width: max-content;
+`;
+
+const UserEmail = styled.div``;
+const UserPhone = styled.div``;
 const CheckoutComponent = () => {
   const cartTotalItems = useSelector((state) => state.cartState.cartTotalItems);
   const cartTotalCost = useSelector((state) => state.cartState.cartTotalCost);
-  const user = useSelector((state) => state.userState);
+  const navigate = useNavigate();
+  const handleModifyAddress = () => {
+    navigate("/profile");
+  };
+
   return (
     <Wrapper>
       <UserDetails>
         <UserName>Udit Choudhary</UserName>
+        <UserEmail>user@test.com</UserEmail>
+        <UserPhone>0226911020</UserPhone>
         <UserAddress>
+          <sup>
+            <b>Address:</b>
+          </sup>
           <span>240D Blockhouse Bay Road, Avondale</span>
           <span>Auckland, New Zealand</span>
           <span>0600</span>
+          <ChangeAddress
+            className="btn btn-sm btn-danger"
+            onClick={() => handleModifyAddress()}
+          >
+            Modify
+          </ChangeAddress>
         </UserAddress>
       </UserDetails>
       <TotalItemsWrapper>
@@ -70,7 +101,7 @@ const CheckoutComponent = () => {
         <span>Total Cost:</span>{" "}
         <TotalItems>&#x20B9; {cartTotalCost}</TotalItems>
       </TotalAmountWrapper>
-      <PayTmWrapper>
+      <PayTmWrapper className="btn btn-sm btn-primary">
         <span>Pay with</span>
         <svg
           enable-background="new 0 0 512 512"

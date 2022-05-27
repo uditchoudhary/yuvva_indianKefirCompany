@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const CardLink = styled(Link)`
   text-decoration: none;
@@ -7,7 +8,7 @@ const CardLink = styled(Link)`
 `;
 const ProductCardWrapper = styled.div`
   border-bottom: 0.1px solid red;
-  height: 80px;
+  height: 100px;
   display: flex;
   margin-top: 5px;
 `;

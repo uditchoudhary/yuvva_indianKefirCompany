@@ -220,6 +220,7 @@ const UserProfilePage = () => {
                             setEnableAddressOption(true);
                             setAddressInputs({});
                           }}
+                          className="btn btn-sm btn-secondary"
                         >
                           Edit
                         </StyledButton>
@@ -287,7 +288,7 @@ const UserProfilePage = () => {
                   <>Add Address</>
                 )}
 
-                <StyledButton
+                {/* <StyledButton
                   className="btn btn-secondary btn-sm"
                   onClick={(event) =>
                     handleAddress(event, {
@@ -300,7 +301,7 @@ const UserProfilePage = () => {
                   }
                 >
                   auto
-                </StyledButton>
+                </StyledButton> */}
                 <StyledButton
                   type="button"
                   className="btn btn-primary"
