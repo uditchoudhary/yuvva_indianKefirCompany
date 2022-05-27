@@ -10,6 +10,7 @@ import {
 import CartProductCard from "./CartProductCard";
 import styled from "styled-components";
 import { device } from "../../styles/devices";
+import CheckoutComponent from "../../Components/CheckoutComponent";
 
 const ParentContainer = styled.div`
   display: flex;
@@ -52,8 +53,16 @@ const TotalItems = styled.div`
   text-align: right;
 `;
 
-const EmptyCart = styled.button`
+const WrapperBottom = styled.div`
   margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const EmptyCart = styled.button`
+  width: max-content;
+`;
+const PrimaryCheckout = styled.button`
   width: max-content;
 `;
 const DeleteCartIconText = styled.span``;
@@ -62,6 +71,7 @@ const RightContainer = styled.div`
   border-left: 0.1px solid green;
   flex: 1;
   padding: 20px;
+  transition: ease-in-out;
 `;
 
 const EmptyCartDisplay = styled.div`
@@ -127,7 +137,7 @@ const CartPage = () => {
         <div className="row">
           {cartData?.itemList ? (
             <ParentContainer>
-              <LeftContainer className="col">
+              <LeftContainer>
                 <ProductWrapper>
                   {cartData.itemList.map((cartItem) => {
                     return (
@@ -145,27 +155,44 @@ const CartPage = () => {
                   <TotalText>Total</TotalText> <TotalItems>items</TotalItems>
                   <TotalCost>price</TotalCost>
                 </TotalItemsAndCostWrapper>
-                <EmptyCart className="btn btn-danger btn-sm">
-                  <DeleteCartIcon
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-trash"
-                    viewBox="0 0 16 16"
+                <WrapperBottom>
+                  <EmptyCart className="btn btn-danger btn-sm">
+                    <DeleteCartIcon
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-trash"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                      />
+                    </DeleteCartIcon>
+                    <DeleteCartIconText onClick={() => handleDeleteCart()}>
+                      Clear Cart
+                    </DeleteCartIconText>
+                  </EmptyCart>
+                  <PrimaryCheckout
+                    className="btn btn-success btn-sm"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseCheckout"
+                    aria-expanded="false"
+                    aria-controls="collapseCheckout"
                   >
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                    <path
-                      fillRule="evenodd"
-                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                    />
-                  </DeleteCartIcon>
-                  <DeleteCartIconText onClick={() => handleDeleteCart()}>
-                    Clear Cart
-                  </DeleteCartIconText>
-                </EmptyCart>
+                    Checkout
+                  </PrimaryCheckout>
+                </WrapperBottom>
               </LeftContainer>
-              <RightContainer className="col">checkout</RightContainer>
+              <RightContainer
+                className="collapse collapse-horizontal"
+                id="collapseCheckout"
+              >
+                <CheckoutComponent />
+              </RightContainer>
             </ParentContainer>
           ) : (
             <EmptyCartDisplay>
