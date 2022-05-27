@@ -1,5 +1,10 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
+const CardLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
 const ProductCardWrapper = styled.div`
   border-bottom: 0.1px solid red;
   height: 80px;
@@ -28,18 +33,13 @@ const ProductTotalCost = styled.div`
   flex: 1;
   text-align: right;
 `;
-// category_name: "Probiotics";
-// image: "https://i.ibb.co/jhBbr2x/fennel.png";
-// item_id: 10203;
-// item_name: "Fennel";
-// price: 250;
-// productCategory_name: "Kefir";
-// quantity: 31;
-// size: 330;
-// _id: "62594a74484a4e95fb0f95fc";
+const RemoveItem = styled.div`
+  margin-left: 20px;
+  color: red;
+  cursor: pointer;
+`;
 
-const CartProductCard = ({ cartItem }) => {
-  console.log(cartItem);
+const CartProductCard = ({ cartItem, onRemoveItemFromCart }) => {
   const {
     image,
     item_name,
@@ -49,23 +49,42 @@ const CartProductCard = ({ cartItem }) => {
     productCategory_name,
     quantity,
     size,
+    totalCost,
   } = cartItem;
   return (
     <ProductCardWrapper>
       <ProductImage src={image}></ProductImage>
       <ProductDetails>
-        <Category>{category_name}</Category>
-        <ProductCategory>
-          {productCategory_name} - {item_name}
-        </ProductCategory>
-        <ProductCode>Product Code: {item_id}</ProductCode>
+        <CardLink to={`/product/${item_id}/details`}>
+          <Category>{category_name}</Category>
+          <ProductCategory>
+            {productCategory_name} - {item_name}
+          </ProductCategory>
+          <ProductCode>Product Code: {item_id}</ProductCode>
+        </CardLink>
       </ProductDetails>
       <ProductQandPrice>
         <ProductQuantity>
-          <QuantityInput type="Number" value={quantity}/>
+          <QuantityInput type="Number" value={quantity} readOnly={true} />
         </ProductQuantity>
-        <ProductTotalCost>350</ProductTotalCost>
+        <ProductTotalCost>{totalCost}</ProductTotalCost>
       </ProductQandPrice>
+      <RemoveItem onClick={() => onRemoveItemFromCart()}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-trash"
+          viewBox="0 0 16 16"
+        >
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+          <path
+            fillRule="evenodd"
+            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+          />
+        </svg>
+      </RemoveItem>
     </ProductCardWrapper>
   );
 };

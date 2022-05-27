@@ -4,6 +4,7 @@ import { device } from "../../styles/devices";
 
 const Container = styled.div`
   width: 80vw;
+  // min-height: 55vh;
   height: auto;
   // height: 61vh;
   // background-color: #b60c2040;

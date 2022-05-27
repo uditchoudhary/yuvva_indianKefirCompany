@@ -35,7 +35,7 @@ export const addToCart = (item) => {
           type: actionTypes.SET_CART_DATA,
           payload: res.data,
         });
-          alert("Added to add cart");
+        alert("Added to add cart");
 
         // dispatch({
         //   type: actionTypes.ITEM_ADD_CART_SUCCESS,
@@ -43,7 +43,7 @@ export const addToCart = (item) => {
         // });
       })
       .catch((err) => {
-          alert("Added to the cart")
+        alert("failed to add to the cart");
         // dispatch({
         //   type: actionTypes.ITEM_ADD_CART_FAILED,
         //   payload: err,
@@ -51,3 +51,29 @@ export const addToCart = (item) => {
       });
   };
 };
+
+export const removeItemFromCart = (cartObjectId) => {
+  return async (dispatch) => {
+    await AUTH_API.post(`cartremoveitem`, cartObjectId)
+      .then((res) => {
+        dispatch({
+          type: actionTypes.SET_CART_DATA,
+          payload: res.data,
+        });
+      })
+      .catch((err) => alert("failed to add to the cart"));
+  };
+};
+
+export const deleteCart = () => {
+  return async (dispatch) => {
+    await AUTH_API.post('/deleteCart')
+    .then(res => {
+        dispatch({
+          type: actionTypes.SET_CART_DATA,
+          payload: res.data,
+        });
+    })
+    .catch(err => alert("Card delete failed"))
+  }
+}
