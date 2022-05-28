@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
 import BodyContainer from "../../BodyContainer";
 import axios from "axios";
+import styled from "styled-components";
+
 import ProductCategoryCard from "../../../Components/ProductCategoryCard/ProductCategoryCard";
+
+const KombuchaGreet = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  height: 20vh;
+  position: relative;
+  font-family: Gilroy;
+  margin-top: -60px;
+`;
 
 const Probiotics = () => {
   const [proboiticsProducts, setProbioticsProducts] = useState([]);
@@ -16,7 +27,10 @@ const Probiotics = () => {
   return (
     <>
       <BodyContainer>
-        <h3 className="page-title"> Probiotics </h3>
+        <KombuchaGreet className="d-flex flex-column align-items-center justify-content-center">
+          <h2>YUUVA KOMBUCHA</h2>
+          <h4>Proudly Brewed in Delhi, India</h4>
+        </KombuchaGreet>
         {isLoading ? (
           <div className="spinner">
             <div
