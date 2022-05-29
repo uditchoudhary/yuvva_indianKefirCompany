@@ -20,9 +20,11 @@ const CategoryRender = ({ direction, category }) => {
       <div
         className={`row flex-lg-row${
           direction === 1 ? "-reverse" : ""
+        } flex-sm-row${
+          direction === 1 ? "-reverse" : ""
         } align-items-center g-5 pb-5`}
       >
-        <div className="col-10 col-sm-8 col-lg-4">
+        <div className="col-6 col-sm-5 col-lg-4 ">
           <img
             src="/static/images/probiotics.webp"
             className="d-block mx-lg-auto img-fluid"
@@ -30,7 +32,7 @@ const CategoryRender = ({ direction, category }) => {
             loading="lazy"
           />
         </div>
-        <div className="col-lg-8">
+        <div className="col-lg-8 col-sm-7 ">
           <h1 className="display-6 fw-bold lh-1 mb-3">{category_name}</h1>
           <p className="lead text-justify">{category_description}</p>
           <div className="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -48,6 +50,112 @@ const CategoryRender = ({ direction, category }) => {
   );
 };
 
+const CategoryCarousel = () => {
+  return (
+    <div
+      id="myCarousel"
+      className="carousel slide mb-4"
+      data-bs-ride="carousel"
+    >
+      <div className="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="0"
+          className="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div className="carousel-inner">
+        <div className="carousel-item active">
+          <img src="/static/images/Banner1.webp" alt="abnner1" />
+          <div className="container">
+            <div className="carousel-caption text-start d-none d-lg-block">
+              <h1>Example headline.</h1>
+              <p>
+                Some representative placeholder content for the first slide of
+                the carousel.
+              </p>
+              {/* <p>
+                <a className="btn btn-lg btn-primary" href="#">
+                  Sign up today
+                </a>
+              </p> */}
+            </div>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="/static/images/Banner1.webp" alt="abnner1" />
+
+          <div className="container">
+            <div className="carousel-caption d-none d-lg-block">
+              {/* <h1>Another example headline.</h1> */}
+              <p>
+                Some representative placeholder content for the second slide of
+                the carousel.
+              </p>
+              {/* <p>
+                <a className="btn btn-lg btn-primary" href="#">
+                  Learn more
+                </a>
+              </p> */}
+            </div>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="/static/images/Banner1.webp" alt="abnner1" />
+
+          <div className="container">
+            <div className="carousel-caption d-none d-lg-block text-end">
+              <h1>One more for good measure.</h1>
+              <p>
+                Some representative placeholder content for the third slide of
+                this carousel.
+              </p>
+              {/* <p>
+                <a className="btn btn-lg btn-primary" href="#">
+                  Browse gallery
+                </a>
+              </p> */}
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#myCarousel"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#myCarousel"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+    </div>
+  );
+};
+
 const LandingPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.productState.categories);
@@ -57,7 +165,7 @@ const LandingPage = () => {
   return (
     <>
       <BodyContainer>
-        <Carousel
+        {/* <Carousel
           autoPlay
           infiniteLoop
           showThumbs={false}
@@ -65,8 +173,9 @@ const LandingPage = () => {
           showStatus={false}
           showIndicators={false}
         >
-          {/* // List of banners */}
-        </Carousel>
+      // List of banners
+        </Carousel> */}
+        <CategoryCarousel />
         {categories &&
           categories.map((cat, index) => {
             const {
