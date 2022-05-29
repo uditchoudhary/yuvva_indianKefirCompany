@@ -24,7 +24,7 @@ const CategoryRender = ({ direction, category }) => {
           direction === 1 ? "-reverse" : ""
         } align-items-center g-5 pb-5`}
       >
-        <div className="col-6 col-sm-5 col-lg-4 ">
+        <div className="col-sm-5 col-lg-4 ">
           <img
             src="/static/images/probiotics.webp"
             className="d-block mx-lg-auto img-fluid"
