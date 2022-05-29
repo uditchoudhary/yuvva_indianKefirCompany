@@ -16,7 +16,7 @@ const CategoryRender = ({ direction, category }) => {
   };
 
   return (
-    <div className="container col-xxl-8">
+    <div className="container col-xxl-10">
       <div
         className={`row flex-lg-row${
           direction === 1 ? "-reverse" : ""
@@ -133,6 +133,122 @@ const CategoryCarousel = () => {
             </div>
           </div>
         </div>
+      </div>
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#myCarousel"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#myCarousel"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+    </div>
+  );
+};
+
+const CategoryCarousel1 = () => {
+  const bannerDummyData = [
+    {
+      bannerName: "Banner 1",
+      className: "Active",
+      img: {
+        url: "/static/images/Banner1.webp",
+        alt: "alt",
+      },
+      button: {
+        slideTo: "0",
+      },
+      captionHeadline: "Example headline.",
+      captionText:
+        "Some representative placeholder content for the first slide of the carousel.",
+      link: "#",
+    },
+    {
+      bannerName: "Banner 2",
+      className: "",
+      img: {
+        url: "/static/images/Banner1.webp",
+        alt: "alt",
+      },
+      button: {
+        slideTo: "0",
+      },
+      captionHeadline: undefined,
+      captionText:
+        "Some representative placeholder content for the second slide of the carousel.",
+      link: "#",
+    },
+    {
+      bannerName: "Banner 3",
+      className: "",
+      img: {
+        url: "/static/images/Banner1.webp",
+        alt: "alt",
+      },
+      button: {
+        slideTo: "0",
+      },
+      captionHeadline: undefined,
+      captionText:
+        "Some representative placeholder content for the second slide of the carousel.",
+      link: "#",
+    },
+  ];
+  return (
+    <div
+      id="myCarousel"
+      className="carousel slide mb-4"
+      data-bs-ride="carousel"
+    >
+      <div className="carousel-indicators">
+        {bannerDummyData.map((banner, index) => {
+          return (
+            <button
+              key={index}
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to={banner.slideTo}
+              className={banner.className}
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+          );
+        })}
+      </div>
+      <div className="carousel-inner">
+        {bannerDummyData.map((banner, index) => {
+          return (
+            <div
+              className={`carousel-item ${
+                banner.className
+              }`}
+              key={index}
+            >
+              <img src={banner.img.url} alt={banner.img.alt} />
+              <div className="container">
+                <div className="carousel-caption text-start d-none d-lg-block">
+                  <h1>{banner.captionHeadline}</h1>
+                  <p>{banner.captionText}</p>
+                  {/* <p>
+                <a className="btn btn-lg btn-primary" href="#">
+                  Sign up today
+                </a>
+              </p> */}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
       <button
         className="carousel-control-prev"
