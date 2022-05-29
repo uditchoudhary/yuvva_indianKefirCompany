@@ -19,6 +19,9 @@ const NavbarWrapper = styled.div`
   @media ${device.mobile} {
     width: 100vw;
   }
+  @media ${device.tablet} {
+    width: 100vw;
+  }
 `;
 
 const NavBarLogo = styled.img`

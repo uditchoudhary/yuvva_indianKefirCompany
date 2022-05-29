@@ -23,6 +23,9 @@ const FooterWrapper = styled.div`
   @media ${device.mobile} {
     width: 100vw;
   }
+  @media ${device.tablet} {
+    width: 100vw;
+  }
 `;
 
 const Copyright = styled.div`
@@ -95,6 +98,7 @@ const FooterCols = styled.div`
     padding-top: 0px;
     padding-bottom: 0px;
   }
+  justify-content: center;
 `;
 
 const StyledLink = styled(Link)`

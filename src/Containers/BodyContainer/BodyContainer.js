@@ -13,6 +13,9 @@ const Container = styled.div`
   @media ${device.mobile} {
     width: 100vw;
   }
+  @media ${device.tablet} {
+    width: 100vw;
+  }
   & .page-title {
     text-align: center;
     color: #b60c20;
