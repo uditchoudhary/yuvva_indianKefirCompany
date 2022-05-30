@@ -52,7 +52,9 @@ export const addToCart = (item) => {
         dispatch(setCartData(res));
       })
       .catch((err) => {
-        alert("failed to add to the cart");
+        if (err.response.status === 404)
+          return alert("Please lgoin before adding item to cart");
+        alert("Failed to add item to the cart");
       });
   };
 };

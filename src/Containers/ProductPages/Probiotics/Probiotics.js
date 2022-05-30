@@ -42,10 +42,10 @@ const Probiotics = () => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className="">
             {proboiticsProducts.map((proboiticsProduct) => {
               return (
-                <div key={proboiticsProduct._id}>
+                <div key={proboiticsProduct._id} className="">
                   <ProductCategoryCard productCategory={proboiticsProduct} />
                 </div>
               );

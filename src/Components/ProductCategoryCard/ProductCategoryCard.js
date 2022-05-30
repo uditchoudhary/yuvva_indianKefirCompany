@@ -41,9 +41,11 @@ const ProductCategoryCard = ({ productCategory }) => {
       <Wrapper>
         <h4 className="text-lefy">{productCategory_name}</h4>
       </Wrapper>
-      {productCategoryItems?.map((product) => {
-        return <ProductCard product={product} />;
-      })}
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {productCategoryItems?.map((product) => {
+          return <ProductCard product={product} />;
+        })}
+      </div>
     </BodyContainer>
   );
 };

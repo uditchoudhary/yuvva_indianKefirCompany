@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import AddToCartService from "../../services/addToCartService";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Store/Actions/CartActions";
-import { useSelector } from "react-redux";
 
 const CardLink = styled(Link)`
   text-decoration: none;
