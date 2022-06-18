@@ -1,3 +1,5 @@
+import { LOGIN_STATUS } from "../../Utilities/Cookies/Constants";
+import getCookies from "../../Utilities/Cookies/getCookies";
 import * as actions from "../Actions/ActionTypes";
 
 const productReducers = (state, action) => {
@@ -5,7 +7,7 @@ const productReducers = (state, action) => {
     case actions.SET_CATEGORIES:
       return { ...state, categories: action.payload };
     default:
-      return { ...state };
+      return { ...state, isLoggedIn: getCookies(LOGIN_STATUS) };
   }
 };
 

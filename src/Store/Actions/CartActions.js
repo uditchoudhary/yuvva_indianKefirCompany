@@ -61,7 +61,7 @@ export const addToCart = (item) => {
 
 export const removeItemFromCart = (body) => {
   return async (dispatch) => {
-    await AUTH_API.post(`cartremoveitem`, body)
+    await AUTH_API.post(`/cartremoveitem`, body)
       .then((res) => {
         dispatch(setCartData(res));
       })

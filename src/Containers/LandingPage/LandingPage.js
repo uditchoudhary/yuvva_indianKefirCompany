@@ -5,7 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../Store/Actions/productActions";
+import { getCategories } from "../../Store/Actions/ProductActions";
 
 const CategoryRender = ({ direction, category }) => {
   const { category_name, category_images, category_description, category_id } =
@@ -228,12 +228,7 @@ const CategoryCarousel1 = () => {
       <div className="carousel-inner">
         {bannerDummyData.map((banner, index) => {
           return (
-            <div
-              className={`carousel-item ${
-                banner.className
-              }`}
-              key={index}
-            >
+            <div className={`carousel-item ${banner.className}`} key={index}>
               <img src={banner.img.url} alt={banner.img.alt} />
               <div className="container">
                 <div className="carousel-caption text-start d-none d-lg-block">

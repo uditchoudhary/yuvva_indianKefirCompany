@@ -51,7 +51,7 @@ const CardButton = styled.button`
     z-index: -1;
   }
   &:hover {
-    box-shadow: inset -12em 0 0 0 #fcc7b7, inset 10.5em 0 0 0 #fcc7b7;
+    box-shadow: inset -32em 0 0 0 #fcc7b7, inset 32.5em 0 0 0 #fcc7b7;
   }
 `;
 

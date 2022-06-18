@@ -3,21 +3,21 @@ import BodyContainer from "../BodyContainer";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LogInOut from "../../Store/Actions/Actions";
 import { useNavigate } from "react-router-dom";
-import { authInstance as AUTH_API } from "../../services/axiosConfig";
-import { getCartData } from "../../Store/Actions/CartActions";
+import { LogInUser, LogOutUser } from "../../Store/Actions/UserActions";
 
 const ErrorMessage = styled.span`
   color: red;
 `;
 
 const LoginPage = () => {
-  const [isloading, setIsLoading] = useState(false);
-  const [loginError, setLoginError] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
+  const isLoading = useSelector((state) => state.userState.login_fetch_loading);
+  const login_failure = useSelector(
+    (state) => state.userState.login_failure_status
+  );
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -28,7 +28,6 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -39,23 +38,7 @@ const LoginPage = () => {
   });
 
   const onLoginSubmit = (body) => {
-    setIsLoading(true);
-    AUTH_API.post(`/login`, body)
-      .then((res) => {
-        dispatch(LogInOut(true));
-        dispatch(getCartData());
-        navigate("/profile");
-        reset();
-      })
-      .catch((err) => {
-        console.log("ERROR ", err);
-        if (err.response.status === 500) {
-          setLoginError("Something went wrong");
-        } else {
-          setLoginError("Invalid email or password");
-        }
-      });
-    setIsLoading(false);
+    dispatch(LogInUser(body));
   };
 
   const handleRegisterClick = () => {
@@ -104,13 +87,13 @@ const LoginPage = () => {
           </div>
           <div className="row mb-3">
             <div className="col text-center">
-              {loginError && (
+              {login_failure && (
                 <p>
-                  <ErrorMessage>{loginError}</ErrorMessage>
+                  <ErrorMessage>{login_failure}</ErrorMessage>
                 </p>
               )}
               <button type="submit" className="btn btn-primary">
-                {isloading ? "Loging in..." : "Submit"}
+                {isLoading ? "Loging in..." : "Submit"}
               </button>
             </div>
           </div>

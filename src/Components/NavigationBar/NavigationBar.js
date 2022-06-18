@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import logo from "../../static/images/yuvva_logo_small.jpg";
 import { device } from "../../styles/devices";
 import { useSelector, useDispatch } from "react-redux";
-import LogInOut from "../../Store/Actions/Actions";
-import { authInstance as AUTH_API } from "../../services/axiosConfig";
-import { useNavigate } from "react-router-dom";
+import { LogOutUser } from "../../Store/Actions/UserActions";
 import { getCartData } from "../../Store/Actions/CartActions";
 
 const NavbarWrapper = styled.div`
@@ -44,16 +42,9 @@ const NavigationBar = () => {
   const cartTotalItems = useSelector((state) => state.cartState.cartTotalItems);
   const isLoggedIn = useSelector((state) => state.userState.isLoggedIn);
 
-  const handleLogInOutButtonClick = (e) => {
-    const action = e.target.innerText;
-    if (action === "Log out") {
-      AUTH_API.get(`/logout`).then((res) => {
-        console.log("deleting token", res.data);
-        // setCookies("ACCESS_TOKEN", res.data.token);
-        // navigate("/login");
-        dispatch(LogInOut(false));
-      });
-    }
+
+  const onLogout = () => {
+    dispatch(LogOutUser());
   };
 
   const onScroll = () => {
@@ -218,7 +209,7 @@ const NavigationBar = () => {
                         <Link
                           className="dropdown-item"
                           to="/"
-                          onClick={handleLogInOutButtonClick}
+                          onClick={onLogout}
                         >
                           Log out
                         </Link>
@@ -233,8 +224,7 @@ const NavigationBar = () => {
                 {isLoggedIn && (
                   <li className="nav-item">
                     <StyledLink className="nav-link nav-item ms-3" to="/cart">
-                      Cart (
-                      {cartTotalItems || 0 })
+                      Cart ({cartTotalItems || 0})
                     </StyledLink>
                   </li>
                 )}
