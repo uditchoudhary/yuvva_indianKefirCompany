@@ -1,10 +1,9 @@
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import BodyContainer from "../BodyContainer";
 import { useNavigate } from "react-router-dom";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { getCategories } from "../../Store/Actions/ProductActions";
 import { getCategories } from "../../Store/Actions/ProductActions";
 
 const CategoryRender = ({ direction, category }) => {
