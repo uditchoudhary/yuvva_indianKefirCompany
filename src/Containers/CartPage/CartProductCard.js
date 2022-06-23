@@ -12,35 +12,55 @@ const ProductCardWrapper = styled.div`
   display: flex;
   margin-top: 5px;
 `;
-const ProductImage = styled.img``;
+const ProductImageWrapper = styled.div`
+  width: 100px;
+`;
+const ProductImage = styled.img`
+  height: 100%;
+  display: flex;
+  justify-item: center;
+  align-self: center;
+`;
 const ProductDetails = styled.div`
   flex: 2;
+  align-self: center;
+  padding-left: 40px;
 `;
 const ProductQandPrice = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
+  align-self: center;
 `;
 const ProductCategory = styled.div``;
 const Category = styled.div``;
 const ProductCode = styled.div``;
 const ProductQuantity = styled.div`
   flex: 1;
+  // border: 0.1px solid black;
+  width: max-content;
 `;
 const QuantityInput = styled.input`
+  // border: none;
   width: 50px;
 `;
 const ProductTotalCost = styled.div`
   flex: 1;
   text-align: right;
+  align-self: center;
 `;
 const RemoveItem = styled.div`
   margin-left: 20px;
   color: red;
   cursor: pointer;
+  align-self: center;
 `;
 
-const CartProductCard = ({ cartItem, onRemoveItemFromCart }) => {
+const CartProductCard = ({
+  cartItem,
+  onRemoveItemFromCart,
+  onQuantityChange,
+}) => {
   const {
     image,
     item_name,
@@ -52,9 +72,22 @@ const CartProductCard = ({ cartItem, onRemoveItemFromCart }) => {
     size,
     totalCost,
   } = cartItem;
+  const [quantityValue, setQuantityValue] = useState(quantity);
+
+  const quantityOnChange = (e) => {
+    setQuantityValue(e.target.value);
+    const value = e.target.value;
+    onQuantityChange({ quantity: value, item_id, price });
+  };
   return (
     <ProductCardWrapper>
-      <ProductImage src={image}></ProductImage>
+      <ProductImageWrapper>
+        <ProductImage
+          src={image}
+          alt={item_name}
+          className="rounded mx-auto d-block"
+        />
+      </ProductImageWrapper>
       <ProductDetails>
         <CardLink to={`/product/${item_id}/details`}>
           <Category>{category_name}</Category>
@@ -66,7 +99,13 @@ const CartProductCard = ({ cartItem, onRemoveItemFromCart }) => {
       </ProductDetails>
       <ProductQandPrice>
         <ProductQuantity>
-          Quantity: <QuantityInput type="Number" value={quantity} readOnly={true} />
+          Quantity:
+          <QuantityInput
+            type="Number"
+            value={quantityValue}
+            min="1"
+            onChange={quantityOnChange}
+          />
         </ProductQuantity>
         <ProductTotalCost>&#x20B9; {totalCost}</ProductTotalCost>
       </ProductQandPrice>

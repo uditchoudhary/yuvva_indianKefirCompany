@@ -78,3 +78,16 @@ export const deleteCart = () => {
       .catch((err) => alert("Card delete failed"));
   };
 };
+
+export const updateCart = (item) => {
+  return async (dispatch) => {
+    console.log("Updating cart with values: ", item);
+    await AUTH_API.post("/cartupdateitem", item)
+      .then((res) => {
+        dispatch(setCartData(res));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};

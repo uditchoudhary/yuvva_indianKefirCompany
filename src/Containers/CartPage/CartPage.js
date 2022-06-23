@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import {
   deleteCart,
   getCartData,
+  updateCart,
   removeItemFromCart,
 } from "../../Store/Actions/CartActions";
 import CartProductCard from "./CartProductCard";
@@ -116,6 +117,9 @@ const CartPage = () => {
   const handleStartShopClick = () => {
     navigate("/products/all");
   };
+  const handleQuantityChange = ({ quantity, item_id, price }) => {
+    dispatch(updateCart({ quantity, item_id, price }));
+  };
 
   if (cartFetchLoading) {
     return (
@@ -152,6 +156,9 @@ const CartPage = () => {
                             price: cartItem.price,
                             quantity: cartItem.quantity,
                           })
+                        }
+                        onQuantityChange={(props) =>
+                          handleQuantityChange(props)
                         }
                       />
                     );

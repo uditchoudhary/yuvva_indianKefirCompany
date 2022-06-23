@@ -67,7 +67,7 @@ const NavigationBar = () => {
 
   useEffect(() => {
     if (isLoggedIn) dispatch(getCartData());
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>
