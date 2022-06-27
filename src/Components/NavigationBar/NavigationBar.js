@@ -206,6 +206,9 @@ const NavigationBar = () => {
                         <Link className="dropdown-item" to="/profile">
                           Profile
                         </Link>
+                        <Link className="dropdown-item" to="/viewOrders">
+                          View Orders
+                        </Link>
                         <Link
                           className="dropdown-item"
                           to="/"

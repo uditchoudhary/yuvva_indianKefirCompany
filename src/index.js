@@ -15,7 +15,7 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
 const store = createStore(rootReducer, initalState, composedEnhancer);
 
 createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <CookiesProvider>
         <Provider store={store}>
@@ -23,7 +23,7 @@ createRoot(document.getElementById("root")).render(
         </Provider>
       </CookiesProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 serviceWorker.register();

@@ -2,7 +2,6 @@ import * as actiontypes from "./ActionTypes";
 import { authInstance as AUTH_API } from "../../services/axiosConfig";
 
 export const LogInUser = (formData) => {
-  console.log(formData);
   return async (dispatch) => {
     dispatch({ type: actiontypes.LOGIN_FETCH_LOADING, payload: true });
     await AUTH_API.post("/login", formData)

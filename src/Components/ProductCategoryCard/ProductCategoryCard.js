@@ -26,7 +26,6 @@ const ProductCategoryCard = ({ productCategory }) => {
     });
   }, []);
 
-  console.log("--> ", productCategoryItems);
   const {
     _id,
     category_id,

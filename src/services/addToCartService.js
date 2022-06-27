@@ -31,7 +31,6 @@ const CardButton = styled.button`
 `;
 
 const HandleAddToCartOnClick = (item) => {
-  console.log("item  -> ", item);
   AUTH_API.post(`/cartadditem`, { item })
     .then((res) => {
       console.log(res);

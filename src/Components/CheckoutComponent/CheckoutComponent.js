@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
+import { addOrders } from "../../Store/Actions/OrderActions";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,25 +70,30 @@ const UserPhone = styled.div``;
 const CheckoutComponent = () => {
   const cartTotalItems = useSelector((state) => state.cartState.cartTotalItems);
   const cartTotalCost = useSelector((state) => state.cartState.cartTotalCost);
+  const cartData = useSelector((state) => state.cartState.cartData);
+  const order_id = Math.floor(Math.random() * 100000);
+  const user = useSelector((state) => state.userState);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleModifyAddress = () => {
     navigate("/profile");
   };
-  const data = {
-    id: "1234",
-    cost: 150,
-    name: "cust12",
-    email: "test@abc.com",
-    phone: "22001203",
-    rest_name: "RestName",
+
+  const orderDetails = {
+    customerId: "6276c6d46fc47744c76714d2",
+    orderId: order_id,
+    orderDate: "Pending",
+    orderTotal: cartTotalCost,
+    orderItem: cartData.itemList,
+    txnStatus: "Pending",
+    bank: "Pending",
   };
-  const paytmPayment = () => {
-    // api to add order
-    // axios
-    //   .post("http://localhost:7001/payment", data)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+
+  const orderCheckout = (body) => {
+    dispatch(addOrders(body));
   };
+
   return (
     <Wrapper>
       <UserDetails>
@@ -116,13 +123,15 @@ const CheckoutComponent = () => {
         <TotalItems>&#x20B9; {cartTotalCost}</TotalItems>
       </TotalAmountWrapper>
       <form action="http://localhost:6001/api/payment" method="POST">
-        <input type="hidden" name="cost" value="150.00" />
-        <input type="hidden" name="id" value="1234" />
-        <input type="hidden" name="name" value="cust12" />
+        <input type="hidden" name="cost" value={orderDetails.orderTotal} />
+        <input type="hidden" name="userId" value={orderDetails.customerId} />
         <input type="hidden" name="email" value="test@abc.com" />
         <input type="hidden" name="phone" value="22001203" />
-        <input type="hidden" name="rest_name" value="RestName" />
-        <PayTmWrapper className="btn btn-sm btn-primary" onClick={paytmPayment}>
+        <input type="hidden" name="orderId" value={orderDetails.orderId} />
+        <PayTmWrapper
+          className="btn btn-sm btn-primary"
+          onClick={() => orderCheckout(orderDetails)}
+        >
           <span>Pay with</span>
           <svg
             enable-background="new 0 0 512 512"

@@ -15,6 +15,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./Containers/LandingPage";
 import AllProducts from "./Containers/ProductPages/AllProducts";
 import UserProfilePage from "./Containers/UserProfilePage";
+import ViewOrders from "./Containers/ViewOrders";
 
 export const AppRoutes = () => {
   return (
@@ -38,6 +39,7 @@ export const AppRoutes = () => {
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route exact path="/refund-policy" element={<RefundPolicy />} />
         <Route exact path="/profile" element={<UserProfilePage />} />
+        <Route exact path="/viewOrders" element={<ViewOrders />} />
         <Route
           exact
           path="/terms-and-conditions"
