@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 // import { createStore, applyMiddleware } from "redux";
 import { legacy_createStore as createStore } from "redux";
 import { CookiesProvider } from "react-cookie";
-import rootReducer from "./Store/Reducers";
+import rootReducer from "./Store/Reducers/rootReducer";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
