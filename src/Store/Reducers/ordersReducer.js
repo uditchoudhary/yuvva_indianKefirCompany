@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   order_fetch_loading: undefined,
 };
 
-const ordersReducer = (state = INITIAL_STATE, action) => {
+const OrdersReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actions.SET_ORDERS:
       return { ...state, ordersData: action.payload };
@@ -17,4 +17,4 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default ordersReducer;
+export default OrdersReducer;

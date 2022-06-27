@@ -4,7 +4,7 @@ import removeCookies from "../../Utilities/Cookies/removeCookies";
 import setCookies from "../../Utilities/Cookies/setCookies";
 import * as actions from "../Actions/ActionTypes";
 
-const userReducers = (state, action) => {
+const UserReducers = (state, action) => {
   switch (action.type) {
     case actions.LOG_IN:
       setCookies(LOGIN_STATUS, true);
@@ -27,4 +27,4 @@ const userReducers = (state, action) => {
   }
 };
 
-export default userReducers;
+export default UserReducers;

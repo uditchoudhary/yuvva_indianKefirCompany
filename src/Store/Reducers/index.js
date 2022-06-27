@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-import productReducers from "./productReducers";
-import userReducers from "./userReducers.js";
-import cartReducer from "./cartReducer";
-import ordersReducer from "./ordersReducer";
+import ProductReducers from "./ProductReducers";
+import UserReducers from "./UserReducers.js";
+import CartReducer from "./CartReducer";
+import OrdersReducer from "./OrdersReducer";
 
 export default combineReducers({
-  productState: productReducers,
-  userState: userReducers,
-  cartState: cartReducer,
-  orderState: ordersReducer,
+  productState: ProductReducers,
+  userState: UserReducers,
+  cartState: CartReducer,
+  orderState: OrdersReducer,
 });

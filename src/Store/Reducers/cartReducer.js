@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   cartTotalCost: undefined,
 };
 
-const cartReducer = (state = INITIAL_STATE, action) => {
+const CartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actions.SET_CART_DATA:
       return { ...state, cartData: action.payload };
@@ -31,4 +31,4 @@ const cartReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default cartReducer;
+export default CartReducer;
