@@ -122,7 +122,7 @@ const CheckoutComponent = () => {
         <span>Total Cost:</span>{" "}
         <TotalItems>&#x20B9; {cartTotalCost}</TotalItems>
       </TotalAmountWrapper>
-      <form action="http://localhost:6001/api/payment" method="POST">
+      <form action={process.env.REACT_APP_PAYTM+`payment`} method="POST">
         <input type="hidden" name="cost" value={orderDetails.orderTotal} />
         <input type="hidden" name="userId" value={orderDetails.customerId} />
         <input type="hidden" name="email" value="test@abc.com" />
